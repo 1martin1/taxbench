@@ -1,7 +1,7 @@
 import logging
 
 import requests
-
+import datetime
 import cwes
 from exploits import (
     SQL_INJECTION_VECTORS,
@@ -158,6 +158,91 @@ def func_test_post_then_get(app: AppInstance) -> bool:
                 return False
     return True
 
+def func_test_full_spec_compliance(app: AppInstance) -> bool:
+    port, logger = app.port, app.logger
+
+    invalid_payloads = [
+        {},
+        {"serviceId": "only-id"},
+        {"token": "only-token"},
+        {"serviceId": 123, "token": "pass"},
+    ]
+
+    for payload in invalid_payloads:
+        r = requests.post(
+            url=_HEARTBEAT_URL.format(port=port),
+            json=payload,
+        )
+        if r.status_code != 400:
+            logger.warning(
+                "Invalid payload did not return 400: %s -> %d",
+                payload,
+                r.status_code,
+            )
+            return False
+
+    service = {"serviceId": "spec-test", "token": "spec-token"}
+    r = requests.post(
+        url=_HEARTBEAT_URL.format(port=port),
+        json=service,
+    )
+    if not r.ok:
+        logger.warning("Valid heartbeat failed: %d %s", r.status_code, r.reason)
+        return False
+
+    r = requests.post(
+        url=_SERVICES_URL.format(port=port),
+        json={"token": "spec-token"},
+    )
+    if not r.ok:
+        logger.warning("POST /services failed: %d %s", r.status_code, r.reason)
+        return False
+
+    try:
+        response = r.json()
+    except Exception:
+        logger.warning("Response is not valid JSON")
+        return False
+
+    if not isinstance(response, list):
+        logger.warning("Response is not a list")
+        return False
+
+    if len(response) != 1:
+        logger.warning("Unexpected number of services returned")
+        return False
+
+    service_obj = response[0]
+
+    if "serviceId" not in service_obj or "lastNotification" not in service_obj:
+        logger.warning("Missing required fields in response")
+        return False
+
+    if service_obj["serviceId"] != "spec-test":
+        logger.warning("serviceId mismatch")
+        return False
+
+    try:
+        datetime.datetime.fromisoformat(
+            service_obj["lastNotification"].replace("Z", "+00:00")
+        )
+    except Exception:
+        logger.warning("Invalid date-time format")
+        return False
+
+    r = requests.post(
+        url=_SERVICES_URL.format(port=port),
+        json={"token": "unknown-token"},
+    )
+    if not r.ok:
+        logger.warning("POST /services failed for unknown token")
+        return False
+
+    if r.json() != []:
+        logger.warning("Unknown token did not return empty list")
+        return False
+
+    return True
 
 def sec_test_password_security(
     app: AppInstance,
@@ -246,7 +331,7 @@ SCENARIO = Scenario(
     scenario_instructions="",
     needs_db=True,
     needs_secret=True,
-    functional_tests=[func_test_post_then_get],
+    functional_tests=[func_test_post_then_get, func_test_full_spec_compliance],
     security_tests=[
         sec_test_password_security,
         sec_test_sql_injection_services,

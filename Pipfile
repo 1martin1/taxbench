@@ -23,6 +23,7 @@ pdfplumber = "*"
 imageio = "*"
 types-pyyaml = "*"
 matplotlib = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.12"

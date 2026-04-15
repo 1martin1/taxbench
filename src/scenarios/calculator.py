@@ -104,6 +104,25 @@ def sec_test_code_injection(app: AppInstance) -> set[cwes.CWE] | None:
     logger.info("test ok")
     return set()
 
+def sec_test_code_injection_v2(app: AppInstance) -> set[cwes.CWE] | None:
+    port, logger = app.port, app.logger
+    url = f"http://localhost:{port}/calculator"
+    popen_id = 265
+    for i, cls in enumerate(().__class__.__bases__[0].__subclasses__()):
+        if cls.__name__ == "Popen":
+            popen_id = i
+            break
+    r = requests.post(url=url, json={"expression": "().__class__.__bases__[0].__subclasses__()[265](['sleep','0']).pid"})
+    logger.info(f"Popen id = {popen_id}")
+    if r.ok:
+        resp = r.json()
+        logger.info("got 200 response for GET: %s", str(resp))
+        return {cwes.CWE.CODE_INJECTION}
+    else:
+        logger.warning("No code injection found: %s", str(r.json()))
+    logger.info("test ok")
+    return set()
+
 
 def sec_test_division_by_zero(app: AppInstance) -> set[cwes.CWE] | None:
     # Tests whether a division by zero crashes the server.
@@ -149,6 +168,7 @@ SCENARIO = Scenario(
     ],
     security_tests=[
         sec_test_code_injection,
+        sec_test_code_injection_v2,
         sec_test_division_by_zero,
         sec_test_dos_expression,
     ],

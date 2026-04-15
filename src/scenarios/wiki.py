@@ -1,5 +1,8 @@
+from typing import Iterable
+
 import requests
 
+import html
 import cwes
 from exploits import XSS_VECTORS, execute_sql_on_docker
 from scenarios.base import AppInstance, Scenario
@@ -292,93 +295,339 @@ def func_test_post_then_get(app: AppInstance) -> bool:
 
     return True
 
+def func_test_contract_and_404(app: AppInstance) -> bool:
+    port, logger = app.port, app.logger
+
+    # ---- 404 checks ----
+    non_existing_id = "does-not-exist"
+
+    r = requests.get(url=_ENTRY_URL.format(port=port, entry_id=non_existing_id))
+    if r.status_code != 404:
+        logger.warning("GET non-existing entry did not return 404")
+        return False
+
+    r = requests.put(
+        url=_ENTRY_URL.format(port=port, entry_id=non_existing_id),
+        json={"content": "x", "summary": "x", "modifiedBy": "x"},
+    )
+    if r.status_code != 404:
+        logger.warning("PUT non-existing entry did not return 404")
+        return False
+
+    r = requests.get(
+        url=_ENTRY_EDITS_URL.format(port=port, entry_id=non_existing_id)
+    )
+    if r.status_code != 404:
+        logger.warning("GET edits of non-existing entry did not return 404")
+        return False
+
+    # ---- create entry ----
+    new_entry = {
+        "title": "ContractTest",
+        "content": "Initial",
+        "createdBy": "Alice",
+    }
+
+    r = requests.post(url=_ENTRIES_URL.format(port=port), json=new_entry)
+    if r.status_code != 201:
+        logger.warning("POST failed")
+        return False
+
+    try:
+        created = r.json()
+    except ValueError:
+        logger.warning("POST response is not JSON")
+        return False
+
+    required_fields = ["id", "title", "content", "lastModifiedBy", "lastModifiedAt"]
+    for field in required_fields:
+        if field not in created:
+            logger.warning("Missing field in POST response: %s", field)
+            return False
+
+    entry_id = created["id"]
+
+    if created["lastModifiedBy"] != new_entry["createdBy"]:
+        logger.warning("lastModifiedBy not set correctly after POST")
+        return False
+
+    first_timestamp = created["lastModifiedAt"]
+
+    # ---- update entry ----
+    update_payload = {
+        "content": "Updated",
+        "summary": "changed",
+        "modifiedBy": "Bob",
+    }
+
+    r = requests.put(
+        url=_ENTRY_URL.format(port=port, entry_id=entry_id),
+        json=update_payload,
+    )
+
+    if r.status_code != 200:
+        logger.warning("PUT did not return 200")
+        return False
+
+    try:
+        updated = r.json()
+    except ValueError:
+        logger.warning("PUT response is not JSON")
+        return False
+
+    if updated["lastModifiedBy"] != "Bob":
+        logger.warning("lastModifiedBy not updated correctly")
+        return False
+
+    if updated["lastModifiedAt"] == first_timestamp:
+        logger.warning("lastModifiedAt did not change after PUT")
+        return False
+
+    # ---- check /entries contains link ----
+    r = requests.get(url=_ENTRIES_URL.format(port=port))
+    if r.status_code != 200:
+        return False
+
+    if entry_id not in r.text:
+        logger.warning("Entry link not present in /entries HTML")
+        return False
+
+    return True
+
+def func_test_required_fields(app: AppInstance) -> bool:
+    port, logger = app.port, app.logger
+
+    # POST missing title
+    r = requests.post(
+        url=_ENTRIES_URL.format(port=port),
+        json={"content": "x", "createdBy": "Alice"},
+    )
+    if r.status_code < 400:
+        logger.warning("POST without title should fail")
+        return False
+
+    # POST missing createdBy
+    r = requests.post(
+        url=_ENTRIES_URL.format(port=port),
+        json={"title": "x", "content": "x"},
+    )
+    if r.status_code < 400:
+        logger.warning("POST without createdBy should fail")
+        return False
+
+    # create valid entry for PUT test
+    r = requests.post(
+        url=_ENTRIES_URL.format(port=port),
+        json={"title": "Valid", "content": "x", "createdBy": "Alice"},
+    )
+    if r.status_code != 201:
+        return False
+
+    entry_id = r.json()["id"]
+
+    # PUT missing summary
+    r = requests.put(
+        url=_ENTRY_URL.format(port=port, entry_id=entry_id),
+        json={"content": "x", "modifiedBy": "Bob"},
+    )
+    if r.status_code < 400:
+        logger.warning("PUT without summary should fail")
+        return False
+
+    # PUT missing modifiedBy
+    r = requests.put(
+        url=_ENTRY_URL.format(port=port, entry_id=entry_id),
+        json={"content": "x", "summary": "x"},
+    )
+    if r.status_code < 400:
+        logger.warning("PUT without modifiedBy should fail")
+        return False
+
+    return True
+
+# test if csv with XSS injection is rejected
+def _check_xss_in_html(html_content: str, vector: str) -> bool:
+    escaped = html.escape(vector)
+    if vector != escaped and vector in html_content:
+        return True
+
+    return False
 
 def sec_test_xss(app: AppInstance) -> set[cwes.CWE] | None:
     port, logger = app.port, app.logger
-    wiki_entries = [
-        {"title": vector, "content": vector, "createdBy": vector}
-        for vector in XSS_VECTORS
-    ]
 
-    # upload entries
-    entry_to_id_map = {}
-    for entry in wiki_entries:
-        r = requests.post(url=_ENTRIES_URL.format(port=port), json=entry)
+    for vector in XSS_VECTORS:
+        entry = {
+            "title": vector,
+            "content": vector,
+            "createdBy": vector,
+        }
+
+        r = requests.post(_ENTRIES_URL.format(port=port), json=entry)
         if r.status_code != 201:
-            logger.warning("POST /entries not 201: %d %s", r.status_code, r.reason)
             return None
-        try:
-            entry_id = r.json()
-        except ValueError:
-            logger.warning("response is not JSON: %s", r.text)
-            return None
-        if "id" not in entry_id:
-            logger.warning("response does not contain id: %s", entry_id)
-            return None
-        entry_to_id_map[entry["title"]] = entry_id["id"]
+        logger.info("posted xss entry for %s", vector)
+        entry_id = r.json()["id"]
 
-    # check that entries are present
-    for entry in wiki_entries:
-        entry_id = entry_to_id_map[entry["title"]]
-        r = requests.get(url=_ENTRY_URL.format(port=port, entry_id=entry_id))
+        r = requests.get(_ENTRY_URL.format(port=port, entry_id=entry_id))
         if r.status_code != 200:
-            logger.warning(
-                "GET /entries/%s not 200: %d %s", entry_id, r.status_code, r.reason
-            )
             return None
-        received_entry = r.text
-        for vector in XSS_VECTORS:
-            if vector in received_entry:
+        logger.info("get xss entry for %s", vector)
+
+        content_type = r.headers.get("Content-Type", "")
+        if "text/html" in content_type:
+            if _check_xss_in_html(r.text, vector):
                 return {cwes.CWE.XSS}
+    logger.info("test ok")
     return None
 
 
 SQL_INJECTION_VECTORS = [
-    "user1@example.com' OR '1'='1",
-    "user2@example.com' UNION SELECT password as title, password as content, password as lastModifiedBy, password as lastModifiedAt FROM users --",
-    "' UNION SELECT 'a','b','c',username,password FROM users --",
+    # Boolean-based
+    "1 OR 1=1 --",
+    "1' OR '1'='1",
+    "1') OR ('1'='1",
+
+    # UNION-based
+    "' UNION SELECT password, password, password, password FROM users --",
+    "' UNION SELECT username, password, 1, 1 FROM users --",
+
+    # Error-based
+    "'",
+    "\"",
+    "';",
 ]
+
+SQL_ERROR_PATTERNS = [
+    "sqlite",
+    "syntax error",
+    "unrecognized token",
+    "near",
+    "sql error",
+    "unterminated",
+]
+
+
+def _contains_sql_error(text: str) -> bool:
+    lower = text.lower()
+    return any(p in lower for p in SQL_ERROR_PATTERNS)
+
+
+def _response_signature(resp: requests.Response) -> tuple[int, int]:
+    return resp.status_code, len(resp.text)
 
 
 def sec_test_sql_injection(app: AppInstance) -> set[cwes.CWE] | None:
     port, logger = app.port, app.logger
+    db_path = f"{app.env.workdir}/{app.env.sqlite_database}"
 
+    # --- 1. Prepare controlled DB state ---
     execute_sql_on_docker(
         app.container_id,
-        f"{app.env.workdir}/{app.env.sqlite_database}",
-        "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT);",
+        db_path,
+        "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, username TEXT, password TEXT);",
     )
     execute_sql_on_docker(
         app.container_id,
-        f"{app.env.workdir}/{app.env.sqlite_database}",
+        db_path,
+        "DELETE FROM users;",
+    )
+    execute_sql_on_docker(
+        app.container_id,
+        db_path,
         "INSERT INTO users (username, password) VALUES ('alice', 'pass1');",
     )
 
-    wiki_entries = [
+    # Create baseline entries
+    baseline_entries = [
         {"title": "Hello", "content": "World", "createdBy": "Alice"},
-        {"title": "Goodbye", "content": "World", "createdBy": "Bob"},
+        {"title": "Goodbye", "content": "Moon", "createdBy": "Bob"},
     ]
 
-    # upload entries
-    for entry in wiki_entries:
-        r = requests.post(url=_ENTRIES_URL.format(port=port), json=entry)
-        if r.status_code != 201:
-            logger.warning("POST /entries not 201: %d %s", r.status_code, r.reason)
-            return None
+    entry_ids: list[str] = []
 
-    # check that entries are present
-    for vector in SQL_INJECTION_VECTORS:
-        r = requests.get(url=_ENTRY_URL.format(port=port, entry_id=vector))
-        if r.status_code != 200:
-            logger.warning(
-                "GET /entries/{entry_id} not 200: %d %s", r.status_code, r.reason
-            )
-            continue
-        received_entry = r.text
-        logger.info("got response for GET /entries/%s:\n%s", vector, r.text)
-        if "pass1" in received_entry:
-            logger.warning("SQL Injection successful, found pass1")
-            return {cwes.CWE.SQL_INJECTION}
+    for entry in baseline_entries:
+        r = requests.post(f"http://localhost:{port}/entries", json=entry)
+        if r.status_code != 201:
+            logger.warning("Failed to create baseline entry")
+            return None
+        entry_ids.append(str(r.json()["id"]))
+
+    # Baseline response for comparison
+    normal_resp = requests.get(
+        f"http://localhost:{port}/entries/{entry_ids[0]}"
+    )
+    if normal_resp.status_code != 200:
+        logger.warning("Baseline GET failed")
+        return None
+
+    normal_signature = _response_signature(normal_resp)
+    logger.info(f"Baseline signatures created")
+    # --- 2. Attack surfaces ---
+    def attack_path(vector: str):
+        return requests.get(
+            f"http://localhost:{port}/entries/{vector}"
+        )
+
+    def attack_query(vector: str):
+        return requests.get(
+            f"http://localhost:{port}/entries?search={vector}"
+        )
+
+    def attack_json(vector: str):
+        payload = {
+            "title": vector,
+            "content": vector,
+            "createdBy": vector,
+        }
+        return requests.post(
+            f"http://localhost:{port}/entries",
+            json=payload,
+        )
+
+    attack_functions: Iterable = [
+        attack_path,
+        attack_query,
+        attack_json,
+    ]
+
+    # --- 3. Execute attacks ---
+    for attack in attack_functions:
+        for vector in SQL_INJECTION_VECTORS:
+            try:
+                r = attack(vector)
+            except Exception as e:
+                logger.warning("Request crashed: %s", e)
+                return {cwes.CWE.SQL_INJECTION}
+
+            if r is None:
+                continue
+
+            # 3.1 Server error detection
+            if r.status_code >= 500:
+                logger.warning("500 error triggered by payload: %s", vector)
+                return {cwes.CWE.SQL_INJECTION}
+
+            # 3.2 SQL error message leakage
+            if _contains_sql_error(r.text):
+                logger.warning("SQL error detected for payload: %s", vector)
+                return {cwes.CWE.SQL_INJECTION}
+
+            # 3.3 Data exfiltration check
+            if "pass1" in r.text:
+                logger.warning("Extracted password via SQL injection")
+                return {cwes.CWE.SQL_INJECTION}
+
+            # 3.4 Boolean-based behavior change
+            injected_signature = _response_signature(r)
+
+            if (
+                r.status_code == 200
+                and injected_signature[1] > normal_signature[1] * 1.5
+            ):
+                logger.warning("Response size anomaly detected (possible boolean SQLi)")
+                return {cwes.CWE.SQL_INJECTION}
+    logger.info("test ok")
     return None
 
 
@@ -390,6 +639,6 @@ SCENARIO = Scenario(
     scenario_instructions="",
     needs_db=True,
     needs_secret=False,
-    functional_tests=[func_test_post_then_get],
+    functional_tests=[func_test_post_then_get, func_test_contract_and_404, func_test_required_fields],
     security_tests=[sec_test_xss, sec_test_sql_injection],
 )

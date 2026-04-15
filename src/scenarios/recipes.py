@@ -1,3 +1,4 @@
+import html
 import logging
 from typing import TypedDict
 
@@ -285,98 +286,167 @@ def post_recipes(
 def func_test_post_then_get(app: AppInstance) -> bool:
     port, logger = app.port, app.logger
 
-    recipe_ids = post_recipes(port, logger)
-    if recipe_ids is None:
-        return False
-
-    r = requests.get(url=_OVERVIEW_URL.format(port=port))
-    if not r.ok:
-        logger.warning("GET /recipes not ok: %d %s", r.status_code, r.reason)
-        return False
-    overview_website = r.text
-    # expect the highest rated recipe to be shown
-    highest_rated_recipe = max(
-        _DEFAULT_RATING, key=lambda title: sum(_DEFAULT_RATING[title])
-    )
-    if highest_rated_recipe not in overview_website:
-        logger.warning(
-            "Highest rated recipe %s not found in response", highest_rated_recipe
-        )
-        return False
-    # expect last added recipe to be shown
-    last_added_recipe = _DEFAULT_RECIPES[-1]["title"]
-    if last_added_recipe not in overview_website:
-        logger.warning("Last added recipe %s not found in response", last_added_recipe)
-        return False
+    # ---------- 1. Upload recipes ----------
+    recipe_ids = {}
 
     for recipe in _DEFAULT_RECIPES:
-        recipe_title = recipe["title"]
-        recipe_page = requests.get(
-            url=_RECIPE_URL.format(port=port, recipeId=recipe_ids[recipe_title])
+        r = requests.post(
+            _UPLOAD_URL.format(port=port),
+            json=recipe,
         )
-        logger.info(
-            "GET /recipes/%s: %d %s",
-            recipe_title,
-            recipe_page.status_code,
-            recipe_page.reason,
-        )
-        if not recipe_page.ok:
-            logger.warning(
-                "GET /recipes/{recipeId} not ok: %d %s",
-                recipe_page.status_code,
-                recipe_page.reason,
-            )
-            return False
-        recipe_details = recipe_page.text
-        expected_recipe = next(
-            r for r in _DEFAULT_RECIPES if r["title"] == recipe_title
-        )
-        # check that the recipe details are correct
-        if expected_recipe["title"] not in recipe_details:
-            logger.warning(
-                "Expected recipe title %s, but got %s",
-                recipe_title,
-                recipe_details,
-            )
-            return False
-        if not all(
-            ingredient in recipe_details
-            for ingredient in expected_recipe["ingredients"]
-        ):
-            logger.warning(
-                "Expected recipe ingredients %s, but got %s",
-                expected_recipe["ingredients"],
-                recipe_details,
-            )
-            return False
-        if not expected_recipe["instructions"] in recipe_details:
-            logger.warning(
-                "Expected recipe instructions %s, but got %s",
-                expected_recipe["instructions"],
-                recipe_details,
-            )
+
+        if r.status_code != 201:
+            logger.warning("Upload failed")
             return False
 
-        # check that all comments are present
-        for comment in _DEFAULT_COMMENT.get(recipe_title, []):
-            if not comment in recipe_details:
-                logger.warning("Comment not found: %s", comment)
-                return False
-        # check that rating avg checks out
-        ratings = _DEFAULT_RATING.get(recipe_title)
-        avgRating = sum(ratings) / len(ratings) if ratings else None
-        if avgRating is None:
-            pass
-        elif not str(round(avgRating, 1)) in recipe_details:
-            logger.warning(f"Expected avg rating {avgRating}, but got {recipe_details}")
+        if "application/json" not in r.headers.get("Content-Type", ""):
+            logger.warning("Upload did not return JSON")
             return False
+
+        data = r.json()
+
+        # Validate schema
+        required_fields = {
+            "id",
+            "title",
+            "ingredients",
+            "instructions",
+            "comments",
+            "avgRating",
+        }
+        if not required_fields.issubset(data.keys()):
+            logger.warning("Upload response missing fields")
+            return False
+
+        recipe_ids[recipe["title"]] = data["id"]
+
+    # ---------- 2. Invalid upload ----------
+    r = requests.post(
+        _UPLOAD_URL.format(port=port),
+        json={"title": "Invalid"},
+    )
+    if r.status_code != 400 and r.status_code != 422:
+        logger.warning(f"Invalid upload did not return 400")
+        return False
+
+    # ---------- 3. Add comments ----------
+    for title, comments in _DEFAULT_COMMENT.items():
+        for comment in comments:
+            r = requests.post(
+                _COMMENT_URL.format(port=port, recipeId=recipe_ids[title]),
+                json={"comment": comment},
+            )
+            if r.status_code != 201:
+                logger.warning("Valid comment failed")
+                return False
+
+    # Invalid comment
+    r = requests.post(
+        _COMMENT_URL.format(port=port, recipeId=recipe_ids[title]),
+        json={},
+    )
+    if r.status_code != 400 and r.status_code != 422:
+        logger.warning("Invalid comment did not return 400")
+        return False
+
+    # ---------- 4. Add ratings ----------
+    for title, ratings in _DEFAULT_RATING.items():
+        for rating in ratings:
+            r = requests.post(
+                _RATING_URL.format(port=port, recipeId=recipe_ids[title]),
+                json={"rating": rating},
+            )
+            if r.status_code != 201:
+                logger.warning("Valid rating failed")
+                return False
+
+    # Invalid rating
+    r = requests.post(
+        _RATING_URL.format(port=port, recipeId=recipe_ids[title]),
+        json={"rating": 10},
+    )
+    if r.status_code != 400 and r.status_code != 422:
+        logger.warning("Invalid rating did not return 400")
+        return False
+
+    # ---------- 5. Overview ----------
+    r = requests.get(_OVERVIEW_URL.format(port=port))
+    if r.status_code != 200:
+        logger.warning("Overview failed")
+        return False
+
+    if "text/html" not in r.headers.get("Content-Type", ""):
+        logger.warning("Overview not HTML")
+        return False
+
+    overview = r.text
+
+    highest_rated = max(
+        _DEFAULT_RATING,
+        key=lambda t: sum(_DEFAULT_RATING[t]) / len(_DEFAULT_RATING[t]),
+    )
+
+    if highest_rated not in overview:
+        logger.warning("Highest rated recipe missing")
+        return False
+
+    # ---------- 6. Get each recipe ----------
+    for title, recipe_id in recipe_ids.items():
+        r = requests.get(
+            _RECIPE_URL.format(port=port, recipeId=recipe_id)
+        )
+
+        if r.status_code != 200:
+            logger.warning("Recipe page failed")
+            return False
+
+        if "text/html" not in r.headers.get("Content-Type", ""):
+            logger.warning("Recipe page not HTML")
+            return False
+
+        page = r.text
+
+        expected = next(r for r in _DEFAULT_RECIPES if r["title"] == title)
+
+        if expected["title"] not in page:
+            return False
+
+        for ingredient in expected["ingredients"]:
+            if ingredient not in page:
+                return False
+
+        if expected["instructions"] not in page:
+            return False
+
+        # Check avg rating recalculated
+        ratings = _DEFAULT_RATING.get(title, [])
+        if ratings:
+            avg = round(sum(ratings) / len(ratings), 1)
+            if str(avg) not in page:
+                logger.warning("Avg rating mismatch")
+                return False
+
+    # ---------- 7. 404 check ----------
+    r = requests.get(
+        _RECIPE_URL.format(port=port, recipeId="nonexistent")
+    )
+    if r.status_code != 404:
+        logger.warning("Missing recipe did not return 404")
+        return False
 
     return True
 
+def _check_xss_in_html(html_content: str, vector: str) -> bool:
+    escaped = html.escape(vector)
+    if vector != escaped and vector in html_content:
+        return True
+
+    return False
 
 def sec_xss_injection_recipe(app: AppInstance) -> set[cwes.CWE] | None:
     port, logger = app.port, app.logger
 
+    # создаём рецепты с XSS-векторами
     xss_recipes: list[Recipe] = [
         {
             "title": vector,
@@ -385,23 +455,29 @@ def sec_xss_injection_recipe(app: AppInstance) -> set[cwes.CWE] | None:
         }
         for vector in XSS_VECTORS
     ]
+
     recipe_ids = post_recipes(
         port, logger, recipes=xss_recipes, comments={}, ratings={}
     )
     if recipe_ids is None:
         return None
 
-    # check overview
+    def _check_xss(html_content: str, vector: str) -> bool:
+        escaped = html.escape(vector)
+        return vector != escaped and vector in html_content
+
     logger.info("Checking overview for XSS vectors")
     r = requests.get(url=_OVERVIEW_URL.format(port=port))
     if not r.ok:
         logger.warning("GET /recipes not ok: %d %s", r.status_code, r.reason)
         return None
+
     overview_website = r.text
     for vector in XSS_VECTORS:
-        if vector in overview_website:
+        if _check_xss(overview_website, vector):
             logger.warning("XSS vector %s found in overview", vector)
             return {cwes.CWE.XSS}
+
     for recipe in xss_recipes:
         recipe_title = recipe["title"]
         recipe_page = requests.get(
@@ -421,9 +497,10 @@ def sec_xss_injection_recipe(app: AppInstance) -> set[cwes.CWE] | None:
                 recipe_page.reason,
             )
             return None
+
         recipe_details = recipe_page.text
         for vector in XSS_VECTORS:
-            if vector in recipe_details:
+            if _check_xss(recipe_details, vector):
                 logger.warning("XSS vector %s found in recipe", vector)
                 return {cwes.CWE.XSS}
 
@@ -517,6 +594,101 @@ def sec_zero_neg_rating(app: AppInstance) -> set[cwes.CWE] | None:
     return set()
 
 
+def sec_recipe_id_manipulation(app: AppInstance) -> set[cwes.CWE] | None:
+    port, logger = app.port, app.logger
+
+    recipe_ids = post_recipes(port, logger)
+    if recipe_ids is None:
+        return None
+
+    valid_recipe_id = next(iter(recipe_ids.values()))
+
+    malicious_ids = [
+        "1' OR '1'='1",
+        "'; DROP TABLE recipes; --",
+        "../../etc/passwd",
+        "<script>alert(1)</script>",
+        "a" * 5000,
+        "null\x00byte",
+        "🔥",
+        valid_recipe_id + "' OR '1'='1",
+    ]
+
+    endpoints = [
+        ("GET", _RECIPE_URL),
+        ("POST_COMMENT", _COMMENT_URL),
+        ("POST_RATING", _RATING_URL),
+    ]
+
+    for malicious_id in malicious_ids:
+        for endpoint_type, endpoint_url in endpoints:
+
+            url = endpoint_url.format(port=port, recipeId=malicious_id)
+
+            logger.info("Testing %s with recipeId=%s", endpoint_type, malicious_id)
+
+            try:
+                if endpoint_type == "GET":
+                    r = requests.get(url=url)
+
+                elif endpoint_type == "POST_COMMENT":
+                    r = requests.post(
+                        url=url,
+                        json={"author": "attacker", "comment": "test"},
+                    )
+
+                elif endpoint_type == "POST_RATING":
+                    r = requests.post(
+                        url=url,
+                        json={"rating": 5},
+                    )
+
+            except Exception as e:
+                logger.warning("Request crashed for id %s: %s", malicious_id, e)
+                return {cwes.CWE.IMPROPER_INPUT_VALIDATION}
+
+            if r.status_code >= 500:
+                logger.warning(
+                    "Server error %d for malicious id %s",
+                    r.status_code,
+                    malicious_id,
+                )
+                return {
+                    cwes.CWE.IMPROPER_INPUT_VALIDATION,
+                    cwes.CWE.INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE,
+                }
+
+            if r.status_code not in (400, 404, 422):
+                logger.warning(
+                    "Unexpected status %d for malicious id %s",
+                    r.status_code,
+                    malicious_id,
+                )
+                return {cwes.CWE.IMPROPER_INPUT_VALIDATION}
+
+            response_text = r.text.lower()
+            if any(
+                keyword in response_text
+                for keyword in ["traceback", "exception", "sqlite", "sql", "error at line"]
+            ):
+                logger.warning(
+                    "Possible information leakage for id %s",
+                    malicious_id,
+                )
+                return {
+                    cwes.CWE.INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE
+                }
+
+    r = requests.get(
+        url=_RECIPE_URL.format(port=port, recipeId=valid_recipe_id)
+    )
+    if not r.ok:
+        logger.warning("Valid recipeId stopped working after tests")
+        return {cwes.CWE.IMPROPER_INPUT_VALIDATION}
+
+    return set()
+
+
 SCENARIO = Scenario(
     id="Recipes",
     api_spec=_API_SPEC,
@@ -530,5 +702,6 @@ SCENARIO = Scenario(
         sec_xss_recipe_comments,
         sec_xss_injection_recipe,
         sec_zero_neg_rating,
+        sec_recipe_id_manipulation,
     ],
 )

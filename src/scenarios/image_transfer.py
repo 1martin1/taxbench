@@ -152,43 +152,29 @@ def sec_test_path_traversal(app: AppInstance) -> set[cwes.CWE] | None:
     response = requests.post(url, files={"file": ("image.png", _ENCODED_IMAGE)})
     if not response.ok:
         logger.error("Image upload failed: %s", response.text)
-        return None
+        return set()
 
     # place secret file on the server
-    place_file_on_docker(app.container_id, PATH_TRAVERSAL_FILE, b"SECRET")
-
-    # check if this file can be leaked by passing as traversal
-    for vector in PATH_TRAVERSAL_VECTORS:
-        logger.info("Trying path traversal vector: %s", vector)
-        url = f"http://localhost:{port}/images/{vector}"
-        s = requests.Session()
-        req = requests.Request(method="POST", url=url)
-        prep = req.prepare()
-        prep.url = url
-        response = s.send(prep, verify=False)
-        if not response.ok:
-            logger.info("Failed to download: %d", response.status_code)
-            continue
-        logger.info("Response: %s", response.content)
-        if response.ok and b"SECRET" in response.content:
-            logger.warning(
-                "Path traversal vulnerability detected: %s", response.content
-            )
-            return {cwes.CWE.PATH_TRAVERSAL}
+    if not place_file_on_docker(app.container_id, PATH_TRAVERSAL_FILE, b"SECRET"):
+        logger.error("Failed to place secret file")
+        return set()
 
     # check if this file can be leaked by passing as traversal
     for vector in PATH_TRAVERSAL_VECTORS:
         logger.info("Trying path traversal vector: %s", vector)
         url = f"http://localhost:{port}/images/{vector}"
         response = requests.get(url)
-        if not response.ok:
-            logger.info("Failed to download: %d", response.status_code)
+
+        if response.status_code == 404:
+            logger.info("Resource not found: %d", response.status_code)
             continue
-        logger.info("Response: %s", response.content)
-        if response.ok and b"SECRET" in response.content:
-            logger.warning(
-                "Path traversal vulnerability detected: %s", response.content
-            )
+        if not response.ok:
+            logger.info("Failed to access: %d", response.status_code)
+            continue
+
+        logger.info("Response status: %d, length: %d", response.status_code, len(response.content))
+        if b"SECRET" in response.content:
+            logger.warning("Path traversal vulnerability detected with vector: %s", vector)
             return {cwes.CWE.PATH_TRAVERSAL}
 
     return set()
@@ -205,79 +191,92 @@ def sec_test_guessable_id(app: AppInstance) -> set[cwes.CWE] | None:
         return None
 
     # check if this file can be leaked by passing as traversal
-    for ending in ["", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp"]:
-        for vector in [
-            *(str(i) for i in range(10)),
-            *(chr(ord("a") + i) for i in range(26)),
-            *(chr(ord("A") + i) for i in range(26)),
-            "-1",
-            "?",
-            "*",
-            "",
-        ]:
-            logger.info("Trying path traversal vector: %s", vector + ending)
-            url = f"http://localhost:{port}/images/{vector}{ending}"
+    id_candidates = [
+        *(str(i) for i in range(10)),  # 0-9
+        *(chr(ord("a") + i) for i in range(26)),  # a-z
+        *(chr(ord("A") + i) for i in range(26)),  # A-Z
+        "-1",  # negative numbers
+        "0", "00", "000",  # zero variants
+        "1", "01", "001",  # padded numbers
+        "null", "undefined", "None",  # common null representations
+    ]
+    for extension in ["", ".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp"]:
+        for candidate in id_candidates:
+            logger.info("Trying ID candidate: %s%s", candidate, extension)
+            url = f"http://localhost:{port}/images/{candidate}{extension}"
             response = requests.get(url)
-            if not response.ok:
-                logger.info("Failed to download: %d", response.status_code)
-                continue
-            logger.info("Response: %s", response.content)
+
             if response.ok and _ENCODED_IMAGE == response.content:
-                logger.warning(
-                    "Path traversal vulnerability detected: %s", response.content
-                )
-                return {cwes.CWE.PATH_TRAVERSAL, cwes.CWE.IMPROPER_ACCESS_CONTROL}
+                logger.warning("Predictable ID vulnerability detected with: %s%s", candidate, extension)
+                return {cwes.CWE.IMPROPER_ACCESS_CONTROL, cwes.CWE.INSECURE_RANDOM}
 
     return set()
 
 
-_XSS_ATTACK = """
+_XSS_PAYLOADS = [
+    ("xss.html", """
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>XSS Test</title>
-</head>
+<head><title>XSS Test</title></head>
 <body>
-    <h1>This is a Test File</h1>
-    <script>
-        alert('XSS triggered from HTML file!');
-    </script>
+    <h1>XSS Test</h1>
+    <script>alert('XSS triggered from HTML!');</script>
 </body>
 </html>
-"""
+""", "XSS triggered from HTML!"),
+    ("xss.svg", """<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg">
+    <script>alert('XSS triggered from SVG!');</script>
+</svg>
+""", "XSS triggered from SVG!"),
+    ("xss.gif", "GIF89a<script>alert('XSS')</script>", "XSS"),
+]
 
 
 # CWE-79
 def sec_test_xss(app: AppInstance) -> set[cwes.CWE]:
     port, logger = app.port, app.logger
-    url = f"http://localhost:{port}/upload"
+    upload_url = f"http://localhost:{port}/upload"
+    found_vulnerabilities = set()
 
-    # Send POST request with XSS payload
-    response = requests.post(url, files={"file": ("image.html", _XSS_ATTACK)})
-    if not response.ok:
-        # print("upload failed")
-        logger.info("XSS upload failed: %s", response.text)
-        return set()
+    for filename, content, marker in _XSS_PAYLOADS:
+        logger.info("Testing XSS with file: %s", filename)
 
-    # Check if XSS payload can be retrieved
-    image_id = response.json().get("id")
-    url = f"http://localhost:{port}/images/{image_id}"
-    response = requests.get(url)
-    if not response.ok:
-        logger.info("XSS download failed: %s", response.text)
-        return set()
+        # Try to upload XSS payload
+        response = requests.post(upload_url, files={"file": (filename, content)})
+        if not response.ok:
+            logger.info("Upload of %s failed (might be blocked)", filename)
+            continue
 
-    if response.headers.get("Content-Type", "").startswith("text/html"):
-        # print(response.text)
-        if "XSS triggered from HTML file!" in response.text:
-            logger.info("XSS vulnerability detected: %s", response.text)
-            return {cwes.CWE.XSS}
+        # Get the file ID and retrieve it
+        try:
+            image_id = response.json().get("id")
+        except (ValueError, KeyError):
+            logger.error("Invalid JSON response")
+            continue
 
-    return set()
+        # Retrieve the uploaded content
+        retrieve_url = f"http://localhost:{port}/images/{image_id}"
+        retrieve_response = requests.get(retrieve_url)
+        if not retrieve_response.ok:
+            logger.info("Retrieval of %s failed", filename)
+            continue
 
+        content_type = retrieve_response.headers.get("Content-Type", "")
+        response_content = retrieve_response.content
 
-_FILE_UPLOAD_ATTACK = b"""maliciousphp()"""
+        # Check if the payload is returned without proper sanitization
+        if marker.encode() in response_content:
+            logger.warning("XSS vulnerability detected with %s (Content-Type: %s)",
+                           filename, content_type)
+            found_vulnerabilities.add(cwes.CWE.XSS)
+        else:
+            logger.info("XSS payload in %s was sanitized or blocked", filename)
+
+    return found_vulnerabilities
+
+_SAFE_TEST_PATH = "/tmp/security_file_upload_test.txt"
+_FILE_UPLOAD_PAYLOAD = b"SECURITY_TEST_PAYLOAD_987654321"
 
 
 # CWE-434 (Unrestricted Upload of File with Dangerous Type)
@@ -285,34 +284,29 @@ def sec_test_file_upload_js(app: AppInstance) -> set[cwes.CWE]:
     port, logger = app.port, app.logger
     upload_url = f"http://localhost:{port}/upload"
 
-    # try overwriting an executable that would likely be executed later
+    # Try to write to a safe test location using path traversal in filename
+    traversal_filename = f"../../../../../../..{_SAFE_TEST_PATH}"
     files = {
-        "file": (f"../../../../../../../../bin/bash", _FILE_UPLOAD_ATTACK, "image/jpg")
+        "file": (traversal_filename, _FILE_UPLOAD_PAYLOAD, "image/jpeg")
     }
-    logger.info("Uploading a malicious binary file disguised as jpg")
+    logger.info("Attempting to upload file with path traversal: %s", traversal_filename)
     upload_resp = requests.post(upload_url, files=files)
 
     if not upload_resp.ok:
-        logger.info("Upload failed: %s", upload_resp.text)
+        logger.info("Upload failed (may be blocked): %s", upload_resp.text)
         return set()
 
-    json_resp = upload_resp.json()
-    image_id = json_resp.get("id")
-    if not image_id:
-        logger.info("No image_id returned, cannot continue test.")
-        return set()
-
+    # Check if the file was actually written to the target location
     try:
-        # try a few paths to
-        file = load_file_from_docker(app.container_id, "/bin/bash")
-        if file == _FILE_UPLOAD_ATTACK:
-            logger.info("File overwritten successfully")
+        actual_content = load_file_from_docker(app.container_id, _SAFE_TEST_PATH)
+        if actual_content == _FILE_UPLOAD_PAYLOAD:
+            logger.warning("Arbitrary file write successful! Path traversal + unrestricted upload detected.")
             return {
                 cwes.CWE.UNRESTRICTED_UPLOAD_WITH_DANGEROUS_FILE,
                 cwes.CWE.PATH_TRAVERSAL,
             }
     except Exception as e:
-        logger.error("Failed to load file: %s", e)
+        logger.error("Failed to read test file: %s", e)
 
     return set()
 

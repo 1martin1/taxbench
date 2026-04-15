@@ -1,0 +1,163 @@
+import json
+import os
+import re
+
+from pathlib import Path
+from typing import Dict
+
+from openai import OpenAI
+from openai.types.chat import ChatCompletion
+
+from prompts import SYS_COMON_PROMPT, build_critic_prompt, SYS_CRITIC_PROMPT, build_fix_prompt, SYS_PLANER_PROMPT, \
+    build_executor_prompt, SYS_EXECUTOR_PROMPT, SYS_SEC_PROMPT
+
+SPEC_TYPE = 'openapi'
+PROMPT_TYPE = 'none'
+N_SAMPLES = 1
+TEMPERATURE = 0.7
+RESULTS_DIR = "../results"
+BASE_URL = "***"
+API_KEY = "***"
+MODEL_NAME = "best"
+# ----------------------------------------------------
+
+def print_tokens_statistic(response: ChatCompletion):
+    if hasattr(response, 'usage'):
+        print(f"Получена статистика от API:")
+        print(f"  Prompt tokens: {response.usage.prompt_tokens}")
+        print(f"  Completion tokens: {response.usage.completion_tokens}")
+        print(f"  Total tokens: {response.usage.total_tokens}")
+
+
+def call_vllm_api(prompt_text: str, temperature: float, system_prompt: str) -> str:
+    client = OpenAI(
+        api_key=API_KEY,
+        base_url=BASE_URL,
+    )
+
+    try:
+        print(f"Отправка запроса к модели: {MODEL_NAME} на {BASE_URL}...")
+
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": prompt_text}
+            ],
+            temperature=temperature
+        )
+
+        print_tokens_statistic(response)
+
+        generated_text = response.choices[0].message.content
+        print("\n--- Ответ LLM (сокращенно) ---")
+        print(generated_text[:100] + "...")
+        print("-------------------------------\n")
+
+        return generated_text
+
+    except Exception as e:
+        error_message = f"# ОШИБКА API: Произошла ошибка при обращении к API: {e}."
+        print(error_message)
+        return error_message
+
+
+def extract_code(text):
+    pattern = r'<CODE>\s*(.*?)\s*</CODE>'
+    matches = re.findall(pattern, text, re.DOTALL)
+    if matches:
+        return matches[0]
+    return text.strip()
+
+
+def save_single_solution(data_item: Dict, code: str, sample: int = 0):
+    scenario_id = data_item['scenario_id']
+    env_id = f"{data_item['env_language']}-{data_item['env_framework']}"
+    config_path = f"temp{TEMPERATURE}-{SPEC_TYPE}-{PROMPT_TYPE}"
+
+    output_file_path = Path(
+        RESULTS_DIR,
+        MODEL_NAME,
+        scenario_id,
+        env_id,
+        config_path,
+        f"sample{sample}",
+        "code",
+        "app.py"
+    )
+
+    output_file_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(output_file_path, 'w', encoding='utf-8') as f:
+        f.write(code.strip())
+
+    print("\n--- РЕЗУЛЬТАТ ---")
+    print(f"Код сгенерирован и сохранен в: {output_file_path}")
+    print(f"Первые 100 символов кода:\n{code.strip()[:100]}...")
+    print("------------------")
+
+def baseline(prompt: str, sample: int, d: dict):
+    raw = call_vllm_api(prompt, TEMPERATURE, SYS_COMON_PROMPT)
+    code = extract_code(raw)
+    save_single_solution(d, code, sample)
+
+def prompted(prompt: str, sample: int, d: dict):
+    raw = call_vllm_api(prompt, TEMPERATURE, SYS_SEC_PROMPT)
+    code = extract_code(raw)
+    save_single_solution(d, code, sample)
+
+def critic(prompt: str, sample: int, d: dict):
+    raw = call_vllm_api(prompt, TEMPERATURE, SYS_COMON_PROMPT)
+    code_v0 = extract_code(raw)
+
+    critic_prompt = build_critic_prompt(code_v0, d)
+    review = call_vllm_api(critic_prompt, TEMPERATURE, SYS_CRITIC_PROMPT)
+
+    if "ISSUES:\n- NONE" not in review:
+        fix_prompt = build_fix_prompt(prompt, code_v0, review)
+        fixed_raw = call_vllm_api(fix_prompt, TEMPERATURE, SYS_COMON_PROMPT)
+        code_v1 = extract_code(fixed_raw)
+    else:
+        code_v1 = code_v0
+
+    save_single_solution(d, code_v1, sample)
+
+def planer(prompt: str, sample: int, d: dict):
+    plan = call_vllm_api(prompt, TEMPERATURE, SYS_PLANER_PROMPT)
+    code = call_vllm_api(build_executor_prompt(plan, d["api_specification"]), TEMPERATURE, SYS_EXECUTOR_PROMPT)
+    code = extract_code(code)
+
+    save_single_solution(d, code, sample)
+
+
+def planer_critic(prompt: str, sample: int, d: dict):
+    plan = call_vllm_api(prompt, TEMPERATURE, SYS_PLANER_PROMPT)
+    code = call_vllm_api(build_executor_prompt(plan, d["api_specification"]), TEMPERATURE, SYS_EXECUTOR_PROMPT)
+    code_v0 = extract_code(code)
+    critic_prompt = build_critic_prompt(code_v0, d)
+    review = call_vllm_api(critic_prompt, TEMPERATURE, SYS_CRITIC_PROMPT)
+
+    if "ISSUES:\n- NONE" not in review:
+        fix_prompt = build_fix_prompt(prompt, code_v0, review)
+        fixed_raw = call_vllm_api(fix_prompt, TEMPERATURE, SYS_COMON_PROMPT)
+        code_v1 = extract_code(fixed_raw)
+    else:
+        code_v1 = code_v0
+
+    save_single_solution(d, code_v1, sample)
+
+
+def mock(prompt: str, sample: int, d: dict):
+    code = "import cringe"
+    save_single_solution(d, code, sample)
+
+
+if __name__ == "__main__":
+    for i in range(0,N_SAMPLES):
+        with open("../baxbench_fastapi_only.json", "r") as f:
+
+            data: Dict = json.load(f)
+        for d in data:
+            with open(f"prompts/{d['scenario_id']}.txt", "r") as f:
+                baxbench_prompt: str = f.read()
+            mock(baxbench_prompt,i,d)

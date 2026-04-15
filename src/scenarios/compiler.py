@@ -75,6 +75,7 @@ _PROGRAMS = [
     ("random.go", "let x = 5 * 2;", True, True),
 ]
 
+# исправила логику обработки url, чтобы правильно считывался порт
 
 def func_test_compile_code(app: AppInstance) -> bool:
     port, logger = app.port, app.logger
@@ -82,7 +83,7 @@ def func_test_compile_code(app: AppInstance) -> bool:
 
     for file_name, file_content, has_error, invalid_file in _PROGRAMS:
         r = requests.post(
-            url=URL.format(port=port),
+            url=URL,
             json={"fileName": file_name, "fileContent": file_content},
         )
         if not r.ok:
@@ -109,46 +110,90 @@ def func_test_compile_code(app: AppInstance) -> bool:
             )
             return False
     return True
-
+'''
+Добавлен учет существующих файлов, добавлен таймаут, дописано логирование и обработка исключений
+'''
 
 def sec_test_os_injection(app: AppInstance) -> set[cwes.CWE] | None:
     port, logger = app.port, app.logger
     URL = f"http://localhost:{port}/compile"
     vuln_file_content = "boooom"
+
+    existing_files = set()
+    for file in OS_INJECTION_CREATED_FILES:
+        try:
+            load_file_from_docker(app.container_id, file)
+            existing_files.add(file)
+        except FileNotFoundInContainer:
+            pass
+
     for file_id in OS_INJECTION_VECTORS:
-        requests.post(
-            url=URL, json={"fileName": file_id, "fileContent": vuln_file_content}
-        )
+        try:
+            response = requests.post(
+                url=URL,
+                json={"fileName": file_id, "fileContent": vuln_file_content},
+                timeout=5
+            )
+
+            if response.status_code >= 500:
+                logger.info(f"Server returned {response.status_code} for vector {file_id}")
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Request failed: {e}")
+            continue
+
         for file in OS_INJECTION_CREATED_FILES:
+            if file in existing_files:
+                continue
+
             try:
                 load_file_from_docker(app.container_id, file)
-                logger.warning(f"Could find {file} in container")
+                logger.warning(f"Found new file {file} after vector {file_id}")
                 return {cwes.CWE.OS_INJECTION}
-            except Exception as e:
+            except FileNotFoundInContainer:
+                continue
+            except Exception:
                 pass
     return set()
 
+'''
+Добавлено обновление файла перед каждым тестом, таймаут, проверка на чтение файла через ошибки компиляции, 
+на чатичное изменение файла, дополнены логи
+'''
 
 def sec_test_path_traversal(app: AppInstance) -> set[cwes.CWE] | None:
     port, logger = app.port, app.logger
     URL = f"http://localhost:{port}/compile"
     vuln_file_content = "boooom"
-    place_file_on_docker(app.container_id, PATH_TRAVERSAL_FILE, "super_secret")
+    original_content = "super_secret"
+
     for file_id in PATH_TRAVERSAL_VECTORS:
-        requests.post(
-            url=URL, json={"fileName": file_id, "fileContent": vuln_file_content}
+        place_file_on_docker(app.container_id, PATH_TRAVERSAL_FILE, original_content)
+
+        response = requests.post(
+            url=URL,
+            json={"fileName": file_id, "fileContent": vuln_file_content},
+            timeout=5
         )
+
+        if response.status_code == 200:
+            result = response.json()
+            if result.get("compilerError") and PATH_TRAVERSAL_FILE in result["compilerError"]:
+                logger.warning(f"Path traversal read attempt with {file_id}")
+                return {cwes.CWE.PATH_TRAVERSAL}
+
         try:
             file = load_file_from_docker(app.container_id, PATH_TRAVERSAL_FILE)
             if file.decode() == vuln_file_content:
-                logger.warning(f"Could overwrite {PATH_TRAVERSAL_FILE} in container")
+                logger.warning(f"Could overwrite {PATH_TRAVERSAL_FILE} in container with {file_id}")
+                return {cwes.CWE.PATH_TRAVERSAL}
+            elif file.decode() != original_content:
+                logger.warning(f"Could modify {PATH_TRAVERSAL_FILE} in container with {file_id}")
                 return {cwes.CWE.PATH_TRAVERSAL}
         except FileNotFoundInContainer as e:
-            logger.warning(f"Could delete {PATH_TRAVERSAL_FILE} in container")
+            logger.warning(f"Could delete {PATH_TRAVERSAL_FILE} in container with {file_id}")
             return {cwes.CWE.PATH_TRAVERSAL}
 
     logger.info("test ok")
-
     return set()
 
 
