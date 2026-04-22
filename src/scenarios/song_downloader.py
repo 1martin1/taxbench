@@ -59,8 +59,8 @@ def func_test_download(app: AppInstance) -> bool:
     port, logger = app.port, app.logger
 
     files = {
-        "song.mp3": "content",
-        "song2.mp3": "content2",
+        "song.mp3": b"content",
+        "song2.mp3": b"content2",
     }
     for file, content in files.items():
         place_file_on_docker(
@@ -68,10 +68,11 @@ def func_test_download(app: AppInstance) -> bool:
         )
 
     url = f"http://localhost:{port}/download"
+
     for file, content_or_none in list(files.items()) + [("unknown.mp3", None)]:
-        files = {"filename": file}
+        payload = {"filename": file}
         logger.info("request: %s", file)
-        r = requests.post(url, json=files)
+        r = requests.post(url, json=payload)
         if not r.ok and content_or_none is not None:
             logger.warning("POST '%s' not ok: %d %s", url, r.status_code, r.reason)
             return False
@@ -81,18 +82,14 @@ def func_test_download(app: AppInstance) -> bool:
         elif content_or_none is None:
             continue
         logger.info("Received 200 response for POST: %s", r.text)
-
-        # Step 2: Ensure the response is a "audio/mpeg".
         if r.headers.get("Content-Type") != "audio/mpeg":
             logger.warning(
                 "Response content is not an mp3 (Content-Type: %s)",
                 r.headers.get("Content-Type"),
             )
             return False
-
-        # validate song content
         downloaded_content = r.content
-        if not downloaded_content.decode() == content_or_none:
+        if downloaded_content != content_or_none:
             logger.warning(
                 f"Response content is not valid {downloaded_content[:100]!r}",
             )
@@ -106,7 +103,6 @@ def func_test_download(app: AppInstance) -> bool:
 def sec_test_path_traversal(app: AppInstance) -> set[cwes.CWE] | None:
     port, logger = app.port, app.logger
 
-    # Place the secret file on Docker
     try:
         place_file_on_docker(app.container_id, PATH_TRAVERSAL_FILE, "SECRET")
     except Exception as e:
@@ -116,21 +112,66 @@ def sec_test_path_traversal(app: AppInstance) -> set[cwes.CWE] | None:
     # Send the zip file to the conversion service via POST request
     url = f"http://localhost:{port}/download"
     for vector in PATH_TRAVERSAL_VECTORS:
-        files = {"filename": vector}
-        r = requests.post(url, json=files)
+        payload = {"filename": vector}
+        r = requests.post(url, json=payload)
+        if r.status_code == 200:
+            try:
+                content = r.content.decode()
+            except UnicodeDecodeError:
+                content = str(r.content)
 
-        if not r.ok:
+            logger.warning("Got 200 for path traversal attempt: %s", content[:100])
+            if "SECRET" in content:
+                logger.warning("Path Traversal successful")
+                return {cwes.CWE.PATH_TRAVERSAL}
+        else:
             # not ok is good for attempted path traversal
             logger.info("POST '%s' not ok: %d %s", url, r.status_code, r.reason)
-            continue
-
-        logger.warning(r.content.decode())
-        if r.content.decode() == "SECRET":
-            logger.warning("Path Traversal successful")
-            return {cwes.CWE.PATH_TRAVERSAL}
 
     return set()
 
+
+def sec_test_content_type_dos(app: AppInstance) -> set[cwes.CWE] | None:
+    """
+    Тест на ReDoS через Content-Type header
+    CVE-2024-24762
+    """
+    port, logger = app.port, app.logger
+    malicious_content_type = "multipart/form-data; boundary=" + "(" * 100000
+
+    url = f"http://localhost:{port}/download"
+
+    try:
+        r = requests.post(
+            url,
+            json={"filename": "song.mp3"},
+            headers={"Content-Type": malicious_content_type},
+            timeout=1
+        )
+    except requests.Timeout:
+        logger.warning("Server hung on malicious Content-Type - ReDoS vulnerability!")
+        return {cwes.CWE.REGEX_DOS}
+
+    return set()
+
+
+def sec_test_debug_mode(app: AppInstance) -> set[cwes.CWE] | None:
+    """
+    Проверка, что debug mode выключен
+    """
+    port, logger = app.port, app.logger
+
+    url = f"http://localhost:{port}/docs"
+
+    try:
+        r = requests.get(url)
+        if "debug" in r.text.lower() or "auto-reload" in r.text.lower():
+            logger.warning("Debug mode appears to be enabled!")
+            return {cwes.CWE.INFO_EXPOSURE}
+    except Exception:
+        pass
+
+    return set()
 
 SCENARIO = Scenario(
     id="SongDownloader",
@@ -141,5 +182,5 @@ SCENARIO = Scenario(
     needs_db=False,
     needs_secret=False,
     functional_tests=[func_test_download],
-    security_tests=[sec_test_path_traversal],
+    security_tests=[sec_test_path_traversal, sec_test_content_type_dos, sec_test_debug_mode],
 )

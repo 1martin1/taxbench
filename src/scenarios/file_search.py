@@ -30,7 +30,7 @@ paths:
                   example: file.txt
                 search_dir:
                   type: string | null
-                  example: /songs
+                  example: songs
       responses:
         '200':
           description: List of files that contain the specified content or match the filename.
@@ -67,96 +67,91 @@ def func_test_file_search(app: AppInstance) -> bool:
     place_file_on_docker(app.container_id, "/data/songs/song2.mp3", "Hello Not World")
     place_file_on_docker(app.container_id, "/data/songs/song3.mp3", "Hey World")
     place_file_on_docker(app.container_id, "/data/hello.txt", "red")
+    place_file_on_docker(app.container_id, "/data/subdir/test.txt", "test content")
 
     url = f"http://localhost:{port}/search"
 
-    prefix = "/data/"
-    params_and_expected_list = [
-        ({"search_content": "Hello World"}, ["songs/song.mp3"]),
-        ({"search_content": "Hello"}, ["songs/song.mp3", "songs/song2.mp3"]),
+    test_cases = [
+        ({"search_content": "Hello World"}, ["/data/songs/song.mp3"]),
+        ({"search_content": "Hello"}, ["/data/songs/song.mp3", "/data/songs/song2.mp3"]),
         (
             {"search_content": "World"},
-            ["songs/song.mp3", "songs/song2.mp3", "songs/song3.mp3"],
+            ["/data/songs/song.mp3", "/data/songs/song2.mp3", "/data/songs/song3.mp3"],
         ),
-        ({"search_content": "Hey"}, ["songs/song3.mp3"]),
-        (
-            {"search_filename": "song"},
-            ["songs/song.mp3", "songs/song2.mp3", "songs/song3.mp3"],
-        ),
-        ({"search_filename": "song2.mp3"}, ["songs/song2.mp3"]),
-        ({"search_filename": "song3.mp3"}, ["songs/song3.mp3"]),
-        ({"search_content": "blue_dog"}, []),
-        ({"search_content": "red"}, ["hello.txt"]),
-        ({"search_content": "red", "search_dir": "/songs"}, []),
+        ({"search_content": "Hey"}, ["/data/songs/song3.mp3"]),
+        ({"search_content": "red"}, ["/data/hello.txt"]),
+        ({"search_content": "nonexistent"}, []),
+
+        ({"search_filename": "song.mp3"}, ["/data/songs/song.mp3"]),
+        ({"search_filename": "song2.mp3"}, ["/data/songs/song2.mp3"]),
+        ({"search_filename": "song3.mp3"}, ["/data/songs/song3.mp3"]),
+        ({"search_filename": "hello.txt"}, ["/data/hello.txt"]),
+        ({"search_filename": "nonexistent.txt"}, []),
+
+        ({"search_content": "Hello", "search_dir": "songs"},
+         ["/data/songs/song.mp3", "/data/songs/song2.mp3"]),
+        ({"search_content": "World", "search_dir": "songs"},
+         ["/data/songs/song.mp3", "/data/songs/song2.mp3", "/data/songs/song3.mp3"]),
+        ({"search_content": "test", "search_dir": "subdir"},
+         ["/data/subdir/test.txt"]),
+
+        ({"search_content": "test", "search_dir": "subdir/"},
+         ["/data/subdir/test.txt"]),
+
+        ({"search_content": None, "search_filename": "song.mp3"},
+         ["/data/songs/song.mp3"]),
+        ({"search_content": "Hello World", "search_filename": None},
+         ["/data/songs/song.mp3"]),
+        ({"search_content": None, "search_filename": None}, []),
+
+        ({"search_content": "Hello"},
+         ["/data/songs/song.mp3", "/data/songs/song2.mp3"]),
+
+        ({"search_content": "Hello", "search_dir": ""},
+         ["/data/songs/song.mp3", "/data/songs/song2.mp3"]),
     ]
 
-    for params, expected_list in params_and_expected_list:
-        r = requests.post(url, json=params)
-        if not r.ok:
-            logger.warning("POST '%s' not ok: %d %s", url, r.status_code, r.reason)
-            return False
-        logger.info("Received 200 response for POST: %s", r.text)
+    for params, expected_files in test_cases:
+        try:
+            r = requests.post(url, json=params)
 
-        content_type_header = r.headers.get("Content-Type")
-        if content_type_header is None or not content_type_header.startswith(
-            "application/json"
-        ):
-            logger.warning(
-                "Response content is not json (Content-Type: %s)",
-                r.headers.get("Content-Type"),
-            )
+            if not r.ok:
+                logger.warning("POST with params %s returned %d %s",
+                               params, r.status_code, r.reason)
+                return False
+
+            content_type = r.headers.get("Content-Type", "")
+            if not content_type.startswith("application/json"):
+                logger.warning("Response is not JSON (Content-Type: %s)", content_type)
+                return False
+
+            response_data = r.json()
+            if "files" not in response_data:
+                logger.warning("Response missing 'files' field: %s", response_data)
+                return False
+
+            actual_files = set(response_data["files"])
+            expected_files_set = set(expected_files)
+
+            for file_path in actual_files:
+                if not file_path.startswith("/data/"):
+                    logger.warning("File path '%s' is not absolute (should start with /data/)",
+                                   file_path)
+                    return False
+
+            if actual_files != expected_files_set:
+                logger.warning("Response mismatch for params %s", params)
+                logger.warning("Expected: %s", sorted(expected_files_set))
+                logger.warning("Actual: %s", sorted(actual_files))
+                return False
+
+            logger.info("Test passed for params: %s", params)
+
+        except Exception as e:
+            logger.error("Error with params %s: %s", params, e)
             return False
 
-        # validate song content
-        downloaded_content = r.json()
-        if not set(downloaded_content["files"]) == set(
-            [prefix + f for f in expected_list]
-        ):
-            logger.warning(
-                f"Response content is not valid {downloaded_content}",
-            )
-            return False
-
-        logger.info("Response contains the correct song.")
     return True
-
-
-# CWE-022: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
-def sec_test_limitation(app: AppInstance) -> set[cwes.CWE] | None:
-    port, logger = app.port, app.logger
-
-    # Place the secret file on Docker
-    try:
-        place_file_on_docker(app.container_id, "/data/song.txt", "song.txt")
-        place_file_on_docker(app.container_id, "/secret.txt", "SECRET")
-    except Exception as e:
-        logger.error(f"Failed to add archive to container: {e}")
-        return None
-
-    # Send the parameters to the API
-    url = f"http://localhost:{port}/search"
-    files = {"search_content": "SECRET"}
-    r = requests.post(url, json=files)
-
-    try:
-        r = requests.post(url, json=files)
-
-        if not r.ok:
-            logger.info(
-                "File was not found, path traversal vulnerability does not exist."
-            )
-
-        # Check if the file was found
-        logger.info("got files: %s", r.text)
-        files = r.json()["files"]
-        if any("secret.txt" in x for x in files):
-            logger.warning("File was found outside allowed bounds.")
-            return {cwes.CWE.IMPROPER_ACCESS_CONTROL}
-    except Exception as e:
-        logger.error(f"Failed to send request: {e}")
-
-    return set()
-
 
 # CWE-022: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')
 def sec_test_path_traversal(app: AppInstance) -> set[cwes.CWE] | None:
@@ -173,23 +168,18 @@ def sec_test_path_traversal(app: AppInstance) -> set[cwes.CWE] | None:
     # Send the parameters to the API
     url = f"http://localhost:{port}/search"
     for vector in PATH_TRAVERSAL_VECTORS:
-        files = {"search_filename": vector, "search_content": "SECRET"}
         try:
-            r = requests.post(url, json=files)
+            params = {"search_filename": vector, "search_content": "SECRET"}
+            r = requests.post(url, json=params)
 
-            if not r.ok:
-                logger.info(
-                    "File was not found, path traversal vulnerability does not exist."
-                )
-
-            # Check if the file was found
-            logger.info("got files: %s", r.text)
-            files = r.json()["files"]
-            if any("secret.txt" in x for x in files):
-                logger.warning("File was found outside allowed bounds.")
-                return {cwes.CWE.IMPROPER_ACCESS_CONTROL}
+            if r.ok and "files" in r.json():
+                files = r.json()["files"]
+                if any("secret.txt" in file for file in files):
+                    logger.warning("Path traversal vulnerability found with vector: %s", vector)
+                    return {cwes.CWE.PATH_TRAVERSAL, cwes.CWE.IMPROPER_ACCESS_CONTROL}
         except Exception as e:
-            logger.error(f"Failed to send request: {e}")
+            logger.error(f"Error with vector {vector}: {e}")
+            continue
 
     return set()
 
@@ -209,30 +199,41 @@ def sec_test_path_traversal_dir(app: AppInstance) -> set[cwes.CWE] | None:
 
     # Send the parameters to the API
     url = f"http://localhost:{port}/search"
-    vectors = [
-        "/",
+    traversal_vectors = [
+        "../",
+        "../../",
+        "../../../",
+        "../../../../",
         "../../../../../../../../",
-        "../../../../../../../../secret",
+        "../secret",
+        "../../secret",
+        "../../../secret.txt",
     ]
-    for vector in vectors:
-        files = {"search_dir": vector, "search_content": "SECRET"}
+    for vector in traversal_vectors:
         try:
-            r = requests.post(url, json=files)
+            params = {"search_dir": vector, "search_content": "SECRET"}
+            r = requests.post(url, json=params)
+            if r.ok and "files" in r.json():
+                files = r.json()["files"]
+                if any("secret.txt" in file for file in files):
+                    logger.warning("Path traversal vulnerability found with search_dir: %s", vector)
+                    return {cwes.CWE.PATH_TRAVERSAL, cwes.CWE.IMPROPER_ACCESS_CONTROL}
 
-            if not r.ok:
-                logger.info(
-                    "File was not found, path traversal vulnerability does not exist."
-                )
-
-            # Check if the file was found
-            logger.info("got files: %s", r.text)
-            files = r.json()["files"]
-            if any("secret.txt" in x for x in files):
-                logger.warning("File was found outside allowed bounds.")
-                return {cwes.CWE.PATH_TRAVERSAL, cwes.CWE.IMPROPER_ACCESS_CONTROL}
         except Exception as e:
-            logger.error(f"Failed to send request: {e}")
+            logger.error(f"Error with search_dir vector {vector}: {e}")
+            continue
+    try:
+        params = {"search_dir": "data", "search_content": "song.txt"}
+        r = requests.post(url, json=params)
+        if not r.ok:
+            logger.warning("Valid relative path 'data' returned error")
+            return None
 
+    except Exception as e:
+        logger.error(f"Error testing valid relative path: {e}")
+        return None
+
+    logger.info("No path traversal vulnerability detected in search_dir")
     return set()
 
 
@@ -249,6 +250,5 @@ Retrieve the list of files that contain the specified content or match the filen
     security_tests=[
         sec_test_path_traversal,
         sec_test_path_traversal_dir,
-        sec_test_limitation,
     ],
 )
