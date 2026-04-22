@@ -1,154 +1,170 @@
-<div align="center">
-    <h1><img height="150px" src="./static/baxbench_icon.png" alt="BaxBench"><br>BaxBench</h1>
+# Фреймворк генерации и оценки backend-приложений (на основе BaxBench)
 
-  <a href="https://www.python.org/">
-<img alt="Build" src="https://img.shields.io/badge/Python-3.12-1f425f.svg?color=blue">
-  </a>
-  <a href="https://opensource.org/licenses/MIT">
-<img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg">
-  </a>
+## Обзор
 
-</div>
+Данный репозиторий представляет собой исследовательский фреймворк для **генерации и оценки backend-приложений по спецификациям с использованием LLM**.
 
-## [13.09.2025] Release v1.0.0
-The repository has been updated to fully reproduce the latest version of the paper. If you are using BaxBench for your work, please consider rebasing to this latest version. The changes involve minor fixes in scenario tests and exploits, and migrating the environments to Debian Bullseye. See the full changelog in the [corresponding release announcement](https://github.com/logic-star-ai/baxbench/releases/tag/v1.0.0)
+Он основан на BaxBench и существенно расширяет его за счёт:
+- гибких пайплайнов генерации
+- исправленных и дополненных тестов
+- поддержки тест-ориентированного улучшения решений
 
-## 👋 Overview
+Репозиторий используется как **экспериментальная среда** для сравнения различных подходов, моделей и пайплайнов.
 
-BaxBench is a coding benchmark for evaluating the ability of LLMs on generating correct and secure code in realistic, security-critical settings.
-Each coding task in BaxBench consists of a *scenario*, describing the API the backend application should implement, and a *framework*, fixing the implementation language and backend framework to use.
-The scenarios can be found [here](src/scenarios/), while all supported frameworks are included [here](src/env/).
+---
 
-> For more details and model evaluations, read our paper [BaxBench: Can LLMs Generate Secure and Correct Backends?](https://arxiv.org/abs/2502.11844) or visit our [website](https://baxbench.com).
+## Основные возможности
 
-### Assets
+### 1. Гибкие пайплайны генерации
 
-- 📜 Paper: [BaxBench: Can LLMs Generate Secure and Correct Backends?](https://arxiv.org/abs/2502.11844)
-- 🏆 Website & Leaderboard: [baxbench.com](https://baxbench.com)
-- 🤗 Dataset: [datasets/LogicStar/BaxBench](https://huggingface.co/datasets/LogicStar/BaxBench)
+Поддерживаются различные сценарии:
 
-## 🚀 Installation
+- Spec → App
+- Spec → Coder + Critic
+- Spec → Tests → App → Critic (feedback loop)
+- Planner → Generator
+- Генерация с усиленным промптингом на безопасность
 
-**Prerequisites:**
+---
 
-> `python 3.12`: Install it from [here](https://www.python.org/downloads/).<br>
-> `docker`: Follow the instructions for installing Docker Desktop [here](https://docs.docker.com/desktop/) (Windows, MacOS, Linux) or for the Docker engine [here](https://docs.docker.com/engine/install/) (Linux). Make sure that Docker has root privileges on your machine.<br>
-> `pipenv`: The project uses pipenv for package management. You can install pipenv by following the instructions [here](https://pipenv.pypa.io/en/latest/).
+### 2. Использование тестов в цикле улучшения
 
-**Setting up the environment and running scripts**
+- Тесты могут генерироваться из спецификаций
+- Приложения прогоняются через тесты
+- Результаты тестов передаются критику
 
-After ensuring that all prerequisites are installed, you can install the environment by running `pipenv install` from the root of the repository. Please ensure that this action does not change `Pipfile.lock`. To run any Python script in the project environment, run from the project root using the command:
+---
+
+### 3. Улучшенные тесты BaxBench
+
+Оригинальные тесты BaxBench были:
+- с ошибками
+- иногда непроходимыми
+- иногда слишком простыми
+
+В данном репозитории:
+- исправлены баги
+- увеличено покрытие
+- добавлены дополнительные кейсы (в том числе security)
+
+---
+
+### 4. Метрики
+
+Используется:
+
+- **pass@k (k = 1, 5)**
+
+---
+
+## Структура проекта
+
+```
+.
+├── src/
+│   ├── ... (оригинальный BaxBench)
+│   └── your_module/   # кастомные пайплайны, генерация, критики
+├── scenarios/         # сценарии с исправленными тестами
+```
+
+---
+
+## Установка
+
 ```bash
-pipenv run python <path_to_python_script> <args>
+git clone https://github.com/1martin1/taxbench.git
+cd taxbench
+
+pipenv install
+pipenv shell
 ```
 
-**Setting API keys**
+---
 
-To generate BaxBench task solutions, the current repository requires the user to set the following environment variables to API keys stored in environment variables in your `.bashrc` or the equivalent configuration file of your system:
+## Требования
+
+- Python
+- OpenAI API ключ
+
+---
+
+## Использование
+
+Пример запуска:
 
 ```bash
-export OPENAI_API_KEY="<your_API_key>"
-export TOGETHER_API_KEY="<your_API_key>"
-export ANTHROPIC_API_KEY="<your_API_key>"
-export OPENROUTER_API_KEY="<your_API_key>"
+pipenv run python src/main.py --models gpt-5.4 --mode evaluate --envs Python-FastAPI --timeout 60 --temperature 0.7  --spec_type openapi --force 
 ```
 
-> **Note:** You may set any API key you do not intend to use simply to an empty or invalid string.
+---
 
-## 💫 Contributing
+## Эксперименты
 
-We welcome contributions from the community. You may contribute by:
-- Adding a scenario:
-    > Create a new scenario in the `scenarios` directory. Look at other scenarios as an example for what has to be there for completeness.<br>
-    > Add the scenario to the `scenarios` list in `src/scenarios/__init__.py`.<br>
-    > Open a pull request to integrate your scenario into the main branch. <br>
-- Adding a new framework:
-    > Create a new scenario in the `env` directory. Look at other environments as an example for what has to be there for completeness.<br>
-    > Add the scenario to the `envs` list in `src/env/__init__.py`.<br>
-    > Open a pull request to integrate your scenario into the main branch. <br>
-- Adding tests to a scenario:
-    > Open a pull request modifying the given scenario file to add further functionality tests or security exploits.
-- Raising issues or giving feedback:
-    > If you identify any issues or want to share feedback with us, you may either contact us directly or raise an issue on GitHub.
-We are looking forward to working with the community and are extremely thankful for any contributions!
+### Результаты
 
-> **Note:** Before contributing code, please run `pipenv run pre-commit install` in the root once to set up the pre-commit hooks.
+#### Qwen3-32B
 
-## 👨🏻‍💻 Usage
+| Pipeline       | func_pass@1 | func_pass@5 | sec_pass@1 | sec_pass@5 |
+|----------------|-------------|-------------|------------|------------|
+| baseline       | 0.51        | 0.75        | 0.26       | 0.43       |
+| critic         | 0.29        | 0.74        | 0.16       | 0.56       |
+| critic + tests | 0.44        | 0.74        | 0.21       | 0.41       |
 
-#### Generating programs
+---
 
-To generate solutions to _all_ scenarios in the `scenarios` list, run the following command:
+#### GPT-OSS-120B
 
-`pipenv run python src/main.py --models gpt-4o --mode generate --n_samples 10 --temperature 0.4`
+| Pipeline       | func_pass@1 | func_pass@5 | sec_pass@1 | sec_pass@5 |
+|----------------|-------------|-------------|------------|------------|
+| baseline       | 0.43        | 0.68        | 0.19       | 0.36       |
+| critic         | 0.39        | 0.71        | 0.28       | 0.61       |
+| critic + tests | 0.46        | 0.83        | 0.28       | 0.67       |
 
-To restrict the generation to a subset of scenarios or environments, see the ["Advanced" section](#advanced) below.
+---
 
-The programs and the generation logs will be saved in the directory `results`.
+#### GPT-5.4
 
-#### Testing generated programs
+| Pipeline       | func_pass@1 | func_pass@5 | sec_pass@1 | sec_pass@5 |
+|----------------|-------------|-------------|------------|------------|
+| baseline       | 0.78        | 0.89        | 0.45       | 0.57       |
+| critic         | 0.45        | 0.75        | 0.34       | 0.54       |
+| critic + tests | 0.64        | 0.82        | 0.39       | 0.64       |
 
-Run: `pipenv run python src/main.py --models gpt-4o --mode test --n_samples 10 --temperature 0.4` to test your generated solutions.
+---
 
-If you have generated solutions externally, e.g., using our [Hugging Face dataset](https://huggingface.co/datasets/LogicStar/BaxBench), make sure to include the generated solutions under the following path w.r.t. the root of this repository:
+## Ключевые наблюдения
 
-`results/<model_name>/<scenario_id>/<env_id>/temp<t>-<spec_type>-<prompt_type>/sample<s>/code`
+Проведённые эксперименты показывают, что качество генерации backend-приложений определяется не только размером модели, но и выбранным пайплайном.
 
-Then set the corresponding parameters in the testing command accordingly. See ["Advanced"](#advanced) below or the argument list in [main.py](src/main.py).
+С увеличением размера модели заметно растёт baseline, особенно по функциональным метрикам. Например, более крупные модели демонстрируют высокие значения `func_pass@1` уже без дополнительных улучшений. Однако при этом выигрыш от использования более сложных пайплайнов (таких как critic или critic + tests) для них оказывается менее выраженным. В отличие от этого, модели среднего размера значительно сильнее выигрывают от архитектурных улучшений пайплайна, что указывает на возможность частичной компенсации недостатка мощности модели за счёт более продуманного процесса генерации.
 
-#### Evaluating and printing
+Использование critic без тестов даёт нестабильные результаты. В ряде случаев это приводит к ухудшению функциональных метрик, несмотря на возможный рост показателей безопасности. Это говорит о том, что без внешнего сигнала (например, результатов тестирования) critic может вносить изменения, которые не всегда улучшают итоговое решение и даже приводят к регрессиям.
 
-Run: `pipenv run python src/main.py --models gpt-4o --mode evaluate --n_samples 10 --temperature 0.4` to print your results to a table in your console.
+Добавление тестов в пайплайн существенно улучшает ситуацию. Передача результатов выполнения тестов критику делает его поведение более обоснованным и позволяет находить реальные ошибки, а не только потенциальные проблемы в коде. В результате наблюдается более стабильный рост метрик и лучший баланс между функциональностью и безопасностью.
 
-#### Advanced
+Отдельно стоит отметить различие между функциональными и security-метриками. Функциональные показатели в целом выше и более стабильны, тогда как безопасность оказывается более сложной задачей: соответствующие метрики ниже и сильнее зависят от используемого пайплайна. При этом critic чаще способствует улучшению безопасности, особенно при рассмотрении нескольких генераций (`pass@5`), но может ухудшать функциональность, если не подкреплён тестами.
 
-Specific models/scenarios/frameworks/samples can be generated, tested, or evaluated by specifying the following arguments in the CLI:
+Во всех экспериментах заметна значительная разница между `pass@1` и `pass@5`, что подчёркивает важность множественной генерации. Это особенно критично для задач, связанных с безопасностью, а также для моделей меньшего размера, где вероятность получить корректное решение с первой попытки ниже.
 
-```
---models                List of model names to use for generation
---scenarios             List of specific scenarios to include (if empty, all scenarios are used)
---exclude_scenarios     List of scenarios to exclude from execution
---envs                  List of specific frameworks to include (if empty, all environments are used)
---exclude_envs          List of frameworks to exclude from execution
---only_samples          Restrict operations to specific sample indices
---spec_type             Type of API specification to use: 'openapi' or 'text' (default: openapi)
-```
+В совокупности результаты показывают, что правильно построенный пайплайн (особенно с использованием тестов и множественных генераций) позволяет существенно повысить качество решений и в некоторых случаях приблизить результаты более слабых моделей к уровню более крупных. Это делает архитектуру генерации не менее важным фактором, чем выбор самой модели.
 
-Other advanced options include:
+---
 
-```
---safety_prompt         Add safety cues to prompts: 'none', 'generic', or 'specific' (default: none)
---temperature           Sampling temperature for generation (default: 0.2)
---n_samples             Number of samples to generate or test, indexed from 0 (default: 5)
---reasoning_effort      Reasoning effort for reasoning models: 'low', 'medium', or 'high' (default: high)
---ks                    List of k values for computing pass@k scores (default: 1, 5)
---results_dir           Directory to save results (default: results/)
---max_concurrent_runs   Maximum number of concurrent test runs
---timeout               Timeout for each test run in seconds (default: 300)
---num_ports             Number of ports available for Docker containers (default: 10000)
---min_port              Minimum port number for Docker containers (default: 12345)
---max_retries           Maximum retries for API calls during generation (default: 20)
---base_delay            Base delay for exponential backoff during generation (default: 1.0)
---max_delay             Maximum delay for exponential backoff during generation (default: 128.0)
---force, -f             Force regeneration even if files already exist
---skip_failed           Skip failed generation tasks and continue with remaining tasks
---prune_docker          Prune Docker containers after running tests
---openrouter            Route API requests through OpenRouter
-```
+## Ограничения
 
-Arguments that accept multiple values (like `--models`, `--scenarios`, `--envs`) take values separated by spaces.
+- Фокус на Python + FastAPI
+- Результаты зависят от LLM
+- Код носит экспериментальный характер
 
-## ✍️ Citation
-If you find our work helpful, please use the following citation.
-```bib
-@article{vero2025baxbenchllmsgeneratecorrect,
-        title={BaxBench: Can LLMs Generate Correct and Secure Backends?}, 
-        author={Mark Vero and Niels Mündler and Victor Chibotaru and Veselin Raychev and Maximilian Baader and Nikola Jovanović and Jingxuan He and Martin Vechev},
-        year={2025},
-        eprint={2502.11844},
-        archivePrefix={arXiv},
-}
-```
+---
 
-## 📝 License
-MIT. Check `LICENSE`.
+## Примечания
+
+- Репозиторий предназначен для исследований
+- Некоторые пайплайны могут быть нестабильными
+
+---
+
+## Благодарности
+
+Основано на BaxBench.
