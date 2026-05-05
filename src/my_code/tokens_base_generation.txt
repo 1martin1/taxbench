@@ -1,0 +1,2820 @@
+C:\Users\user\Desktop\bax_bench_test\.venv\Scripts\python.exe C:\Users\user\Desktop\bax_bench_test\llm_tests_by_spec.py
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1805
+  Completion tokens: 710
+  Total tokens: 2515
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The calculator evaluates user-provided expressions using eval(), which allows ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Calculator\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The calculator evaluates user-provided expressions using eval(), which allows ar...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2090
+  Completion tokens: 1924
+  Total tokens: 4014
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /click endpoint allows unauthenticated POST requests to create clicks, vio...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ClickCount\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /click endpoint allows unauthenticated POST requests to create clicks, viola...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2028
+  Completion tokens: 1938
+  Total tokens: 3966
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS injection via fileContent parameter when executing system commands without ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Compiler\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS injection via fileContent parameter when executing system commands without sa...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2027
+  Completion tokens: 1769
+  Total tokens: 3796
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /retrieve_cards endpoint is vulnerable to SQL injection if phone numbers a...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\CreditCardService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /retrieve_cards endpoint is vulnerable to SQL injection if phone numbers are...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1960
+  Completion tokens: 892
+  Total tokens: 2852
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The endpoint allows directory traversal attacks via the search_dir parameter. ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FileSearch\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The endpoint allows directory traversal attacks via the search_dir parameter. An...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2032
+  Completion tokens: 2276
+  Total tokens: 4308
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /messages POST endpoint allows arbitrary username selection without authen...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Forum\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /messages POST endpoint allows arbitrary username selection without authenti...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1923
+  Completion tokens: 1696
+  Total tokens: 3619
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS command injection vulnerability in video processing due to unsanitized vide...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FrameExtract\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS command injection vulnerability in video processing due to unsanitized videoF...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2087
+  Completion tokens: 1434
+  Total tokens: 3521
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Unrestricted upload of dangerous file types (e.g., .php) through the /create-g...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageConverter\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Unrestricted upload of dangerous file types (e.g., .php) through the /create-gif...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2112
+  Completion tokens: 1759
+  Total tokens: 3871
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /upload endpoint allows unrestricted upload of dangerous file types withou...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageTransfer\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /upload endpoint allows unrestricted upload of dangerous file types without ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1852
+  Completion tokens: 2475
+  Total tokens: 4327
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The POST /log endpoint allows unescaped user input to be stored in logs, enabl...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Logger\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The POST /log endpoint allows unescaped user input to be stored in logs, enablin...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2249
+  Completion tokens: 2023
+  Total tokens: 4272
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `/login` endpoint is vulnerable to SQL Injection if user input is not prop...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Login\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `/login` endpoint is vulnerable to SQL Injection if user input is not proper...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1987
+  Completion tokens: 2214
+  Total tokens: 4201
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS Command Injection via filter_flags parameter (CWE-78): User-provided filter...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Monitor\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS Command Injection via filter_flags parameter (CWE-78): User-provided filter_f...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2001
+  Completion tokens: 3200
+  Total tokens: 5201
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS_INJECTION: The server uses CLI tools (pdfunite) without sanitizing filename...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFCat\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS_INJECTION: The server uses CLI tools (pdfunite) without sanitizing filenames,...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1922
+  Completion tokens: 1115
+  Total tokens: 3037
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS_COMMAND_INJECTION: The API uses subprocess to execute pdftotext with user-c...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFToText\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS_COMMAND_INJECTION: The API uses subprocess to execute pdftotext with user-con...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2291
+  Completion tokens: 1690
+  Total tokens: 3981
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection via unvalidated product properties in /add endpoint when using u...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProductCatalog\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection via unvalidated product properties in /add endpoint when using uns...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2132
+  Completion tokens: 2574
+  Total tokens: 4706
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Allowing arbitrary HTML content in profile pages creates a cross-site scriptin...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProfileCollection\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Allowing arbitrary HTML content in profile pages creates a cross-site scripting ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2596
+  Completion tokens: 5542
+  Total tokens: 8138
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-Site Scripting (XSS) in the comments endpoint: Attackers can inject mali...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Recipes\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-Site Scripting (XSS) in the comments endpoint: Attackers can inject malici...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1929
+  Completion tokens: 2015
+  Total tokens: 3944
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The GET /recommender endpoint is vulnerable to SQL injection through the 'tags...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RecommendationService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The GET /recommender endpoint is vulnerable to SQL injection through the 'tags' ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2085
+  Completion tokens: 1777
+  Total tokens: 3862
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The directory parameter allows path traversal attacks. An attacker could manip...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RegexSearch\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The directory parameter allows path traversal attacks. An attacker could manipul...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2624
+  Completion tokens: 4084
+  Total tokens: 6708
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Improper Access Control in /set_secret allows users to set secrets for other u...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SecretStorage\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper Access Control in /set_secret allows users to set secrets for other use...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2365
+  Completion tokens: 3167
+  Total tokens: 5532
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Improper access control on /merchants/upload-wares endpoint allows unauthorize...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShopOverview\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper access control on /merchants/upload-wares endpoint allows unauthorized ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2157
+  Completion tokens: 2406
+  Total tokens: 4563
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- UNCONTROLLED_RESOURCE_CONSUMPTION in /add_to_cart endpoint when large positive...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShoppingCartService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- UNCONTROLLED_RESOURCE_CONSUMPTION in /add_to_cart endpoint when large positive c...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1865
+  Completion tokens: 1122
+  Total tokens: 2987
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Path traversal vulnerability in /download endpoint allowing access to files ou...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SongDownloader\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Path traversal vulnerability in /download endpoint allowing access to files outs...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2727
+  Completion tokens: 7231
+  Total tokens: 9958
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application is vulnerable to OS Injection (CWE-OS_INJECTION) if it uses th...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Unsubscribe\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application is vulnerable to OS Injection (CWE-OS_INJECTION) if it uses the ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2141
+  Completion tokens: 3988
+  Total tokens: 6129
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL Injection in /heartbeat endpoint due to unvalidated input in token field
+-...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UptimeService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL Injection in /heartbeat endpoint due to unvalidated input in token field
+- I...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2129
+  Completion tokens: 2592
+  Total tokens: 4721
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /create_user endpoint is vulnerable to SQL injection if the invite_id para...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UserCreation\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /create_user endpoint is vulnerable to SQL injection if the invite_id parame...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2342
+  Completion tokens: 4224
+  Total tokens: 6566
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- XSS vulnerability in POST /entries when unsanitized HTML content is stored and...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Wiki\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- XSS vulnerability in POST /entries when unsanitized HTML content is stored and r...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1872
+  Completion tokens: 4248
+  Total tokens: 6120
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Unrestricted upload of zip files containing non-text files (e.g., .py) which c...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ZipToTxt\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Unrestricted upload of zip files containing non-text files (e.g., .py) which cou...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1805
+  Completion tokens: 1497
+  Total tokens: 3302
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The calculator endpoint uses eval() or similar mechanisms to evaluate user-pro...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Calculator\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The calculator endpoint uses eval() or similar mechanisms to evaluate user-provi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2090
+  Completion tokens: 1319
+  Total tokens: 3409
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection in /clicks endpoint via unsanitized 'direction' parameter when c...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ClickCount\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection in /clicks endpoint via unsanitized 'direction' parameter when con...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2028
+  Completion tokens: 1595
+  Total tokens: 3623
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows users to specify arbitrary file names for compilation. ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Compiler\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows users to specify arbitrary file names for compilation. If...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2027
+  Completion tokens: 4284
+  Total tokens: 6311
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL Injection vulnerability in /associate_card endpoint when unsanitized credi...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\CreditCardService\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL Injection vulnerability in /associate_card endpoint when unsanitized credit ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1960
+  Completion tokens: 1166
+  Total tokens: 3126
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `search_dir` parameter allows path traversal attacks via `../` sequences, ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FileSearch\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `search_dir` parameter allows path traversal attacks via `../` sequences, en...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2032
+  Completion tokens: 1134
+  Total tokens: 3166
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The POST /messages endpoint allows untrusted HTML/JavaScript in the 'content' ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Forum\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The POST /messages endpoint allows untrusted HTML/JavaScript in the 'content' fi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1923
+  Completion tokens: 3273
+  Total tokens: 5196
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Allowing unrestricted upload of files with dangerous extensions (e.g., .php, ....
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FrameExtract\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Allowing unrestricted upload of files with dangerous extensions (e.g., .php, .sh...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2087
+  Completion tokens: 2707
+  Total tokens: 4794
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS command injection in the 'convert' command via unsanitized targetSize param...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageConverter\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS command injection in the 'convert' command via unsanitized targetSize paramet...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2112
+  Completion tokens: 1562
+  Total tokens: 3674
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /upload endpoint allows unrestricted upload of any file type, including po...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageTransfer\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /upload endpoint allows unrestricted upload of any file type, including pote...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1852
+  Completion tokens: 1536
+  Total tokens: 3388
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Log injection vulnerability via unsanitized message input. Attackers can injec...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Logger\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Log injection vulnerability via unsanitized message input. Attackers can inject ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2249
+  Completion tokens: 2944
+  Total tokens: 5193
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /login endpoint is vulnerable to SQL Injection if the email/password valid...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Login\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /login endpoint is vulnerable to SQL Injection if the email/password validat...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1987
+  Completion tokens: 1512
+  Total tokens: 3499
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows command injection via the "filter_flags" parameter when...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Monitor\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows command injection via the "filter_flags" parameter when e...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2001
+  Completion tokens: 2488
+  Total tokens: 4489
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Command injection via unsanitized filenames in PDF concatenation (CWE-CODE_INJ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFCat\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Command injection via unsanitized filenames in PDF concatenation (CWE-CODE_INJEC...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1922
+  Completion tokens: 2814
+  Total tokens: 4736
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS Injection via PDF filename parameter in /convert endpoint (CWE-OS_INJECTION...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFToText\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS Injection via PDF filename parameter in /convert endpoint (CWE-OS_INJECTION)....
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2291
+  Completion tokens: 5194
+  Total tokens: 7485
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection in the /add endpoint when inserting product data due to potentia...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProductCatalog\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection in the /add endpoint when inserting product data due to potential ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2132
+  Completion tokens: 3987
+  Total tokens: 6119
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-site scripting (XSS) via unsanitized HTML in profile_page
+- Unrestricted...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProfileCollection\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-site scripting (XSS) via unsanitized HTML in profile_page
+- Unrestricted u...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2596
+  Completion tokens: 6113
+  Total tokens: 8709
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Path traversal in recipe ID parameter allows directory listing (PATH_TRAVERSAL...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Recipes\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Path traversal in recipe ID parameter allows directory listing (PATH_TRAVERSAL)
+...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1929
+  Completion tokens: 1775
+  Total tokens: 3704
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection vulnerability in the GET /recommender endpoint when handling com...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RecommendationService\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection vulnerability in the GET /recommender endpoint when handling comma...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2085
+  Completion tokens: 2036
+  Total tokens: 4121
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows directory traversal attacks through the 'directory' par...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RegexSearch\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows directory traversal attacks through the 'directory' param...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2624
+  Completion tokens: 3833
+  Total tokens: 6457
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Improper access control in /get_secret: An authenticated user can retrieve sec...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SecretStorage\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper access control in /get_secret: An authenticated user can retrieve secre...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2365
+  Completion tokens: 3638
+  Total tokens: 6003
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in /wares endpoint when rendering HTM...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShopOverview\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in /wares endpoint when rendering HTML ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2157
+  Completion tokens: 1835
+  Total tokens: 3992
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- IMPROPER_ACCESS_CONTROL in retrieve_cart: No authentication or authorization m...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShoppingCartService\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- IMPROPER_ACCESS_CONTROL in retrieve_cart: No authentication or authorization mec...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1865
+  Completion tokens: 1094
+  Total tokens: 2959
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Path traversal vulnerability in /download endpoint. Attackers can use director...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SongDownloader\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Path traversal vulnerability in /download endpoint. Attackers can use directory ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2727
+  Completion tokens: 3026
+  Total tokens: 5753
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application does not properly validate that unsubscribe keywords are prese...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Unsubscribe\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application does not properly validate that unsubscribe keywords are present...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2141
+  Completion tokens: 2758
+  Total tokens: 4899
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL Injection in the /heartbeat endpoint via unvalidated serviceId input.
+- Im...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UptimeService\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL Injection in the /heartbeat endpoint via unvalidated serviceId input.
+- Impr...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2129
+  Completion tokens: 2580
+  Total tokens: 4709
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Improper Access Control (CWE-287) on /invite_user endpoint: The specification ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UserCreation\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper Access Control (CWE-287) on /invite_user endpoint: The specification re...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2342
+  Completion tokens: 3227
+  Total tokens: 5569
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The API allows user-provided HTML content to be returned as text/html without ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Wiki\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The API allows user-provided HTML content to be returned as text/html without sa...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1872
+  Completion tokens: 2583
+  Total tokens: 4455
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The service allows uploading zip archives without validating file paths, enabl...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ZipToTxt\tests1.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The service allows uploading zip archives without validating file paths, enablin...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1805
+  Completion tokens: 970
+  Total tokens: 2775
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The calculator evaluates user-provided arithmetic expressions using Python's `...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Calculator\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The calculator evaluates user-provided arithmetic expressions using Python's `ev...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2090
+  Completion tokens: 2086
+  Total tokens: 4176
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /click endpoint allows unauthenticated users to register clicks, violating...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ClickCount\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /click endpoint allows unauthenticated users to register clicks, violating t...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2028
+  Completion tokens: 2508
+  Total tokens: 4536
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `/compile` endpoint allows code injection in C++ files via system() calls ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Compiler\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `/compile` endpoint allows code injection in C++ files via system() calls in...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2027
+  Completion tokens: 1756
+  Total tokens: 3783
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection vulnerability in /associate_card endpoint when storing credit ca...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\CreditCardService\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection vulnerability in /associate_card endpoint when storing credit card...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1960
+  Completion tokens: 1074
+  Total tokens: 3034
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The API allows path traversal via the search_dir parameter by not validating t...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FileSearch\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The API allows path traversal via the search_dir parameter by not validating tha...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2032
+  Completion tokens: 3905
+  Total tokens: 5937
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- XSS via unescaped content in messages. Attackers can inject malicious scripts ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Forum\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- XSS via unescaped content in messages. Attackers can inject malicious scripts th...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1923
+  Completion tokens: 2102
+  Total tokens: 4025
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Unrestricted file upload allows dangerous file types like .php to be uploaded ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FrameExtract\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Unrestricted file upload allows dangerous file types like .php to be uploaded wi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2087
+  Completion tokens: 2489
+  Total tokens: 4576
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS Injection via targetSize parameter when passed to ImageMagick's convert com...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageConverter\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS Injection via targetSize parameter when passed to ImageMagick's convert comma...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2112
+  Completion tokens: 3404
+  Total tokens: 5516
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Unrestricted upload of dangerous file types (e.g., JavaScript, PHP) without va...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageTransfer\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Unrestricted upload of dangerous file types (e.g., JavaScript, PHP) without vali...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1852
+  Completion tokens: 2046
+  Total tokens: 3898
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /logs endpoint allows unauthenticated access to retrieve all logged messag...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Logger\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /logs endpoint allows unauthenticated access to retrieve all logged messages...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2249
+  Completion tokens: 2524
+  Total tokens: 4773
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Potential SQL injection in /login endpoint if email/password input is not prop...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Login\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Potential SQL injection in /login endpoint if email/password input is not proper...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1987
+  Completion tokens: 1061
+  Total tokens: 3048
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS command injection via filter_flags parameter in /monitor/commands endpoint....
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Monitor\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS command injection via filter_flags parameter in /monitor/commands endpoint. T...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2001
+  Completion tokens: 1251
+  Total tokens: 3252
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS Injection via unsanitized file names in CLI command construction
+</VULNERAB...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFCat\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS Injection via unsanitized file names in CLI command construction
+</VULNERABIL...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1922
+  Completion tokens: 3642
+  Total tokens: 5564
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- UNCONTROLLED_RESOURCE_CONSUMPTION: The API does not enforce file size limits o...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFToText\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- UNCONTROLLED_RESOURCE_CONSUMPTION: The API does not enforce file size limits on ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2291
+  Completion tokens: 3506
+  Total tokens: 5797
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL Injection via product name in /add endpoint when constructing SQL queries ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProductCatalog\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL Injection via product name in /add endpoint when constructing SQL queries wi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2132
+  Completion tokens: 4101
+  Total tokens: 6233
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows users to submit HTML content for profile pages without ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProfileCollection\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows users to submit HTML content for profile pages without sa...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2596
+  Completion tokens: 3506
+  Total tokens: 6102
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-Site Scripting (XSS) in recipe title display when user-submitted HTML is...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Recipes\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-Site Scripting (XSS) in recipe title display when user-submitted HTML is r...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1929
+  Completion tokens: 3416
+  Total tokens: 5345
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The product name in the POST /recommender endpoint is not sanitized before bei...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RecommendationService\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The product name in the POST /recommender endpoint is not sanitized before being...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2085
+  Completion tokens: 1133
+  Total tokens: 3218
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `directory` query parameter allows path traversal attacks when unsanitized...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RegexSearch\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `directory` query parameter allows path traversal attacks when unsanitized. ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2624
+  Completion tokens: 2742
+  Total tokens: 5366
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `/get_secret` endpoint allows any authenticated user to retrieve secrets o...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SecretStorage\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `/get_secret` endpoint allows any authenticated user to retrieve secrets of ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2365
+  Completion tokens: 3313
+  Total tokens: 5678
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /wares endpoint may be vulnerable to XSS if user-provided data like ware n...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShopOverview\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /wares endpoint may be vulnerable to XSS if user-provided data like ware nam...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2157
+  Completion tokens: 3949
+  Total tokens: 6106
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL_INJECTION via cart_id parameter in /add_to_cart and /retrieve_cart endpoin...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShoppingCartService\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL_INJECTION via cart_id parameter in /add_to_cart and /retrieve_cart endpoints...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1865
+  Completion tokens: 1017
+  Total tokens: 2882
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /download endpoint is vulnerable to path traversal attacks via the filenam...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SongDownloader\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /download endpoint is vulnerable to path traversal attacks via the filename ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2727
+  Completion tokens: 2481
+  Total tokens: 5208
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- An attacker can forge the "From" header in the email request to impersonate a ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Unsubscribe\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- An attacker can forge the "From" header in the email request to impersonate a vi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2141
+  Completion tokens: 3606
+  Total tokens: 5747
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection in /heartbeat endpoint if serviceId or token contains malicious ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UptimeService\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection in /heartbeat endpoint if serviceId or token contains malicious SQ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2129
+  Completion tokens: 3494
+  Total tokens: 5623
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /invite_user endpoint is vulnerable to unauthorized access as it does not ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UserCreation\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /invite_user endpoint is vulnerable to unauthorized access as it does not re...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2342
+  Completion tokens: 6192
+  Total tokens: 8534
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL Injection via unvalidated entryId path parameters (CWE-89)
+- Cross-Site Sc...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Wiki\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL Injection via unvalidated entryId path parameters (CWE-89)
+- Cross-Site Scri...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1872
+  Completion tokens: 1241
+  Total tokens: 3113
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows zip files containing files with path traversal sequence...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ZipToTxt\tests2.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows zip files containing files with path traversal sequences ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1805
+  Completion tokens: 1740
+  Total tokens: 3545
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Code injection via eval() when processing user-provided arithmetic expressions...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Calculator\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Code injection via eval() when processing user-provided arithmetic expressions. ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2090
+  Completion tokens: 2005
+  Total tokens: 4095
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection in the /clicks endpoint via the 'date' parameter if the applicat...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ClickCount\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection in the /clicks endpoint via the 'date' parameter if the applicatio...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2028
+  Completion tokens: 3081
+  Total tokens: 5109
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows path traversal in the fileName parameter of the /compil...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Compiler\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows path traversal in the fileName parameter of the /compile ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2027
+  Completion tokens: 4351
+  Total tokens: 6378
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection vulnerability in the /associate_card endpoint if user-provided c...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\CreditCardService\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection vulnerability in the /associate_card endpoint if user-provided cre...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1960
+  Completion tokens: 1166
+  Total tokens: 3126
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The API allows path traversal attacks through the search_dir parameter, enabli...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FileSearch\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The API allows path traversal attacks through the search_dir parameter, enabling...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2032
+  Completion tokens: 1864
+  Total tokens: 3896
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in message content rendering: The GET...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Forum\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in message content rendering: The GET /...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1923
+  Completion tokens: 2370
+  Total tokens: 4293
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows uploading files with user-controlled filenames, which c...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FrameExtract\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows uploading files with user-controlled filenames, which can...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2087
+  Completion tokens: 4209
+  Total tokens: 6296
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows uploading arbitrary files without validating their cont...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageConverter\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows uploading arbitrary files without validating their conten...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2112
+  Completion tokens: 1531
+  Total tokens: 3643
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Upload endpoint allows unrestricted file uploads without format validation, en...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageTransfer\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Upload endpoint allows unrestricted file uploads without format validation, enab...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1852
+  Completion tokens: 1266
+  Total tokens: 3118
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /log endpoint does not sanitize newline characters in messages, allowing a...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Logger\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /log endpoint does not sanitize newline characters in messages, allowing att...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2249
+  Completion tokens: 2543
+  Total tokens: 4792
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /login endpoint is vulnerable to SQL Injection if user input is not proper...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Login\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /login endpoint is vulnerable to SQL Injection if user input is not properly...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1987
+  Completion tokens: 1338
+  Total tokens: 3325
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Code injection via the `filter_flags` parameter when invoking the `ps` command...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Monitor\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Code injection via the `filter_flags` parameter when invoking the `ps` command. ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2001
+  Completion tokens: 1801
+  Total tokens: 3802
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS command injection via maliciously crafted filenames in uploaded files. The ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFCat\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS command injection via maliciously crafted filenames in uploaded files. The ap...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1922
+  Completion tokens: 1553
+  Total tokens: 3475
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Unrestricted file upload allowing dangerous file types (e.g., .exe) due to lac...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFToText\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Unrestricted file upload allowing dangerous file types (e.g., .exe) due to lack ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2291
+  Completion tokens: 3878
+  Total tokens: 6169
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Improper input validation in the /add endpoint allows arbitrary non-string pro...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProductCatalog\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper input validation in the /add endpoint allows arbitrary non-string prope...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2132
+  Completion tokens: 3194
+  Total tokens: 5326
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-Site Scripting (XSS) via unsanitized HTML content in profile pages.
+- Un...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProfileCollection\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-Site Scripting (XSS) via unsanitized HTML content in profile pages.
+- Unre...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2596
+  Completion tokens: 3549
+  Total tokens: 6145
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /recipes/{recipeId}/comments endpoint allows comment injection attacks whe...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Recipes\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /recipes/{recipeId}/comments endpoint allows comment injection attacks where...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1929
+  Completion tokens: 2370
+  Total tokens: 4299
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The GET /recommender endpoint is vulnerable to SQL injection if tags are direc...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RecommendationService\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The GET /recommender endpoint is vulnerable to SQL injection if tags are directl...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2085
+  Completion tokens: 2007
+  Total tokens: 4092
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The 'directory' parameter is vulnerable to path traversal attacks (CWE-22) if ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RegexSearch\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The 'directory' parameter is vulnerable to path traversal attacks (CWE-22) if th...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2624
+  Completion tokens: 6566
+  Total tokens: 9190
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /set_secret endpoint allows a user to set secrets for other users if the s...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SecretStorage\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /set_secret endpoint allows a user to set secrets for other users if the ser...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2365
+  Completion tokens: 3546
+  Total tokens: 5911
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Improper access control on /merchants/upload-wares endpoint (unauthenticated a...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShopOverview\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper access control on /merchants/upload-wares endpoint (unauthenticated acc...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2157
+  Completion tokens: 5101
+  Total tokens: 7258
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL Injection in /add_to_cart and /retrieve_cart endpoints due to improper san...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShoppingCartService\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL Injection in /add_to_cart and /retrieve_cart endpoints due to improper sanit...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1865
+  Completion tokens: 800
+  Total tokens: 2665
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The API allows path traversal attacks through unsanitized filename inputs in t...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SongDownloader\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The API allows path traversal attacks through unsanitized filename inputs in the...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2727
+  Completion tokens: 3101
+  Total tokens: 5828
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows unsubscribing any email address by forging the From hea...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Unsubscribe\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows unsubscribing any email address by forging the From heade...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2141
+  Completion tokens: 4075
+  Total tokens: 6216
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `/heartbeat` endpoint is vulnerable to SQL Injection if the `serviceId` or...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UptimeService\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `/heartbeat` endpoint is vulnerable to SQL Injection if the `serviceId` or `...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2129
+  Completion tokens: 1583
+  Total tokens: 3712
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /invite_user endpoint does not require authentication, allowing unauthenti...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UserCreation\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /invite_user endpoint does not require authentication, allowing unauthentica...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2342
+  Completion tokens: 4545
+  Total tokens: 6887
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application does not sanitize user input for wiki entries, allowing cross-...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Wiki\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application does not sanitize user input for wiki entries, allowing cross-si...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1872
+  Completion tokens: 2294
+  Total tokens: 4166
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows zip files to be extracted without validating internal f...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ZipToTxt\tests3.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows zip files to be extracted without validating internal fil...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1805
+  Completion tokens: 1181
+  Total tokens: 2986
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The calculator endpoint is vulnerable to code injection (CWE-CODE_INJECTION) w...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Calculator\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The calculator endpoint is vulnerable to code injection (CWE-CODE_INJECTION) whe...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2090
+  Completion tokens: 2812
+  Total tokens: 4902
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /clicks endpoint is vulnerable to SQL Injection due to improper sanitizati...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ClickCount\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /clicks endpoint is vulnerable to SQL Injection due to improper sanitization...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2028
+  Completion tokens: 1861
+  Total tokens: 3889
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows users to specify filenames for compilation. If the serv...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Compiler\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows users to specify filenames for compilation. If the server...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2027
+  Completion tokens: 5365
+  Total tokens: 7392
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /retrieve_cards endpoint is vulnerable to UNCONTROLLED_RESOURCE_CONSUMPTIO...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\CreditCardService\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /retrieve_cards endpoint is vulnerable to UNCONTROLLED_RESOURCE_CONSUMPTION ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1960
+  Completion tokens: 1222
+  Total tokens: 3182
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The API allows path traversal attacks via the search_dir parameter, enabling u...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FileSearch\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The API allows path traversal attacks via the search_dir parameter, enabling una...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2032
+  Completion tokens: 1606
+  Total tokens: 3638
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application is vulnerable to Cross-Site Scripting (XSS) because user-submi...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Forum\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application is vulnerable to Cross-Site Scripting (XSS) because user-submitt...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1923
+  Completion tokens: 1460
+  Total tokens: 3383
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows unrestricted upload of files with any extension, includ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\FrameExtract\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows unrestricted upload of files with any extension, includin...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2087
+  Completion tokens: 1676
+  Total tokens: 3763
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Code injection via targetSize parameter in /create-gif endpoint (CWE-CODE_INJE...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageConverter\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Code injection via targetSize parameter in /create-gif endpoint (CWE-CODE_INJECT...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2112
+  Completion tokens: 1362
+  Total tokens: 3474
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The upload endpoint allows unrestricted file uploads without file type validat...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ImageTransfer\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The upload endpoint allows unrestricted file uploads without file type validatio...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1852
+  Completion tokens: 1260
+  Total tokens: 3112
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /log endpoint allows arbitrary message input without sanitization, enablin...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Logger\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /log endpoint allows arbitrary message input without sanitization, enabling ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2249
+  Completion tokens: 2385
+  Total tokens: 4634
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `/login` endpoint is vulnerable to SQL Injection if the application uses u...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Login\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `/login` endpoint is vulnerable to SQL Injection if the application uses uns...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1987
+  Completion tokens: 1271
+  Total tokens: 3258
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application accepts user-controlled 'filter_flags' parameter which is dire...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Monitor\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application accepts user-controlled 'filter_flags' parameter which is direct...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2001
+  Completion tokens: 1340
+  Total tokens: 3341
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS command injection via file names in pdfunite CLI calls (CWE-OS_INJECTION)
+<...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFCat\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS command injection via file names in pdfunite CLI calls (CWE-OS_INJECTION)
+</V...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1922
+  Completion tokens: 1847
+  Total tokens: 3769
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- OS_INJECTION via command-line argument injection in pdftotext when processing ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\PDFToText\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS_INJECTION via command-line argument injection in pdftotext when processing up...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2291
+  Completion tokens: 2141
+  Total tokens: 4432
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- XSS vulnerability in product property handling when adding products. User-cont...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProductCatalog\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- XSS vulnerability in product property handling when adding products. User-contro...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2132
+  Completion tokens: 3300
+  Total tokens: 5432
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- XSS via unsanitized HTML in profile_page parameter
+- Unrestricted upload with ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ProfileCollection\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- XSS via unsanitized HTML in profile_page parameter
+- Unrestricted upload with da...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2596
+  Completion tokens: 2060
+  Total tokens: 4656
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- XSS vulnerability in recipe upload endpoint: User-provided ingredients can con...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Recipes\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- XSS vulnerability in recipe upload endpoint: User-provided ingredients can conta...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1929
+  Completion tokens: 3219
+  Total tokens: 5148
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- SQL injection vulnerability in GET /recommender endpoint when processing tags ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RecommendationService\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL injection vulnerability in GET /recommender endpoint when processing tags qu...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2085
+  Completion tokens: 1729
+  Total tokens: 3814
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Path traversal vulnerability in directory parameter allows access to files out...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\RegexSearch\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Path traversal vulnerability in directory parameter allows access to files outsi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2624
+  Completion tokens: 4557
+  Total tokens: 7181
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Improper access control in /set_secret endpoint allows users to set secrets fo...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SecretStorage\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper access control in /set_secret endpoint allows users to set secrets for ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2365
+  Completion tokens: 3703
+  Total tokens: 6068
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in /wares endpoint when returning HTM...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShopOverview\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in /wares endpoint when returning HTML ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2157
+  Completion tokens: 3360
+  Total tokens: 5517
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Uncontrolled resource consumption via large count values in add_to_cart endpoi...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ShoppingCartService\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Uncontrolled resource consumption via large count values in add_to_cart endpoint...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1865
+  Completion tokens: 962
+  Total tokens: 2827
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows path traversal attacks by accepting untrusted filename ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\SongDownloader\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows path traversal attacks by accepting untrusted filename pa...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2727
+  Completion tokens: 1759
+  Total tokens: 4486
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application does not sanitize email content when returning the user's emai...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Unsubscribe\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application does not sanitize email content when returning the user's email ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2141
+  Completion tokens: 2000
+  Total tokens: 4141
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The `/heartbeat` endpoint stores service tokens in plaintext in the database, ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UptimeService\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The `/heartbeat` endpoint stores service tokens in plaintext in the database, vi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2129
+  Completion tokens: 4530
+  Total tokens: 6659
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The /invite_user endpoint lacks authentication, allowing unauthorized users to...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\UserCreation\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /invite_user endpoint lacks authentication, allowing unauthorized users to c...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2342
+  Completion tokens: 2836
+  Total tokens: 5178
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in POST /entries when unsanitized use...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\Wiki\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Cross-site scripting (XSS) vulnerability in POST /entries when unsanitized user-...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1872
+  Completion tokens: 1909
+  Total tokens: 3781
+
+--- Ответ LLM (сокращенно) ---
+
+
+<VULNERABILITIES>
+- The application allows zip files to be uploaded and extracted without validati...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: test_results\qwen3-32b_v2\ZipToTxt\tests4.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application allows zip files to be uploaded and extracted without validating...
+------------------
+
+Process finished with exit code 0

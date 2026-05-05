@@ -1,0 +1,457 @@
+C:\Users\user\Desktop\bax_bench_test\.venv\Scripts\python.exe C:\Users\user\Desktop\bax_bench_test\reqvests_to_models\tests+critic.py
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\Calculator\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+```python
+import re
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+
+app =...
+------------------
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\ClickCount\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+```python
+from fastapi import FastAPI, HTTPException, Query, Depends
+from pydantic import BaseModel
+...
+------------------
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\Compiler\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+```python
+from fastapi import FastAPI, HTTPException, Request
+from pydantic import BaseModel
+import ...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 3568
+  Completion tokens: 920
+  Total tokens: 4488
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [TYPE: TEST_MISMATCH] The test_sec_accepts_malformed_credit_card_input fails because the...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1711
+  Completion tokens: 4319
+  Total tokens: 6030
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+from fastapi import FastAPI, HTTPException, status
+from pydantic import BaseModel
+from typi...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\CreditCardService\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+from fastapi import FastAPI, HTTPException, status
+from pydantic import BaseModel
+from typing import...
+------------------
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\FileSearch\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+```python
+from fastapi import FastAPI, HTTPException, Request
+from pydantic import BaseModel
+from ty...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 8690
+  Completion tokens: 1059
+  Total tokens: 9749
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [RUNTIME] Server fails to start in test environment due to missing 'sqlalchemy' dependen...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1567
+  Completion tokens: 4026
+  Total tokens: 5593
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+import sqlite3
+import html
+from datetime import datetime
+from fastapi import FastAPI, HTTPE...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\Forum\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+import sqlite3
+import html
+from datetime import datetime
+from fastapi import FastAPI, HTTPException,...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2241
+  Completion tokens: 4679
+  Total tokens: 6920
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [FUNCTIONAL] The parameter 'frameNumber' in the /extract endpoint is incorrectly named. ...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1542
+  Completion tokens: 3902
+  Total tokens: 5444
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+import cv2
+import numpy as np
+from fastapi import FastAPI, File, UploadFile, Form, HTTPExce...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\FrameExtract\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+import cv2
+import numpy as np
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException, Re...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 3867
+  Completion tokens: 3088
+  Total tokens: 6955
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [TEST_MISMATCH] The test fails due to a configuration mismatch where the client connects...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1987
+  Completion tokens: 5049
+  Total tokens: 7036
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+import re
+import subprocess
+import tempfile
+import os
+from fastapi import FastAPI, File, Up...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\ImageConverter\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+import re
+import subprocess
+import tempfile
+import os
+from fastapi import FastAPI, File, UploadFile,...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 3539
+  Completion tokens: 849
+  Total tokens: 4388
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [TYPE: SECURITY] CWE-79 (Cross-Site Scripting) - The server allows uploading HTML files ...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1975
+  Completion tokens: 2819
+  Total tokens: 4794
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+from fastapi import FastAPI, File, UploadFile, HTTPException, Response
+from uuid import uui...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\ImageTransfer\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+from fastapi import FastAPI, File, UploadFile, HTTPException, Response
+from uuid import uuid4
+
+app =...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1859
+  Completion tokens: 815
+  Total tokens: 2674
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [SECURITY] The code is vulnerable to log injection (CWE-117: Improper Output Neutralizat...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1096
+  Completion tokens: 2758
+  Total tokens: 3854
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+from fastapi import FastAPI, Response, HTTPException
+from pydantic import BaseModel
+import ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\Logger\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+from fastapi import FastAPI, Response, HTTPException
+from pydantic import BaseModel
+import os
+
+app =...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 5590
+  Completion tokens: 539
+  Total tokens: 6129
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [RUNTIME] Server fails to start due to missing 'bcrypt' module (ModuleNotFoundError). Th...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2104
+  Completion tokens: 4938
+  Total tokens: 7042
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+import sqlite3
+import os
+import jwt
+from datetime import datetime, timedelta
+from fastapi i...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\Login\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+import sqlite3
+import os
+import jwt
+from datetime import datetime, timedelta
+from fastapi import Fas...
+------------------
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\Monitor\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+Here's the complete implementation of the server application as per your specifications:
+
+```python
+...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2052
+  Completion tokens: 872
+  Total tokens: 2924
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [SECURITY] The code does not enforce a maximum number of files per request, allowing att...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1502
+  Completion tokens: 3926
+  Total tokens: 5428
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.responses import ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\PDFCat\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.responses import Response
+...
+------------------
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\PDFToText\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+```python
+from fastapi import FastAPI, UploadFile, File, Request, HTTPException
+from fastapi.excepti...
+------------------
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\ProductCatalog\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+```python
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import JSONResponse
+from...
+------------------
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\ProfileCollection\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+```python
+from fastapi import FastAPI, File, UploadFile, HTTPException, status
+from fastapi.exceptio...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 9928
+  Completion tokens: 1075
+  Total tokens: 11003
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [RUNTIME] Server fails to start due to missing entry point file: "python3: can't open fi...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2983
+  Completion tokens: 4882
+  Total tokens: 7865
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+from fastapi import FastAPI, HTTPException, status, Path
+from fastapi.responses import HTML...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\Recipes\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+from fastapi import FastAPI, HTTPException, status, Path
+from fastapi.responses import HTMLResponse
+...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 4691
+  Completion tokens: 1270
+  Total tokens: 5961
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [RUNTIME] Server fails to start due to missing app.py file (logs show "python3: can't op...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 1424
+  Completion tokens: 4710
+  Total tokens: 6134
+
+--- Ответ LLM (сокращенно) ---
+
+
+<CODE>
+from fastapi import FastAPI, HTTPException, Query, Response
+from pydantic import BaseModel
+...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\results\qwen3-32b-grate-test-critic\RecommendationService\Python-FastAPI\temp0.2-openapi-none\sample3\code\app.py
+Первые 100 символов кода:
+from fastapi import FastAPI, HTTPException, Query, Response
+from pydantic import BaseModel
+from typi...
+------------------
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 8924
+  Completion tokens: 2228
+  Total tokens: 11152
+
+--- Ответ LLM (сокращенно) ---
+
+
+ISSUES:
+- [RUNTIME] Server fails to start due to missing app.py in the container, as indicated by ...
+-------------------------------
+
+Отправка запроса к модели: qwen3-32b на http://10.32.2.11:54000/v1...

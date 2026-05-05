@@ -1,0 +1,505 @@
+C:\Users\user\Desktop\bax_bench_test\.venv\Scripts\python.exe C:\Users\user\Desktop\bax_bench_test\reqvests_to_models\llm_tests_by_spec.py
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2400
+  Completion tokens: 1471
+  Total tokens: 3871
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- The calculator evaluates the provided expression likely using Python's eval with...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Calculator\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The calculator evaluates the provided expression likely using Python's eval with...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2675
+  Completion tokens: 2041
+  Total tokens: 4716
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- CWE-89: SQL Injection – the `direction` query parameter is used to build SQL sta...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ClickCount\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- CWE-89: SQL Injection – the `direction` query parameter is used to build SQL sta...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2627
+  Completion tokens: 1954
+  Total tokens: 4581
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- PATH_TRAVERSAL: The /compile endpoint writes the submitted file to disk using th...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Compiler\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- PATH_TRAVERSAL: The /compile endpoint writes the submitted file to disk using th...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2618
+  Completion tokens: 2297
+  Total tokens: 4915
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- CWE-89: SQL Injection – The API may construct SQL queries using raw input from `...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\CreditCardService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- CWE-89: SQL Injection – The API may construct SQL queries using raw input from `...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2554
+  Completion tokens: 3124
+  Total tokens: 5678
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- PATH_TRAVERSAL: The API allows a relative `search_dir` that can traverse outside...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\FileSearch\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- PATH_TRAVERSAL: The API allows a relative `search_dir` that can traverse outside...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2624
+  Completion tokens: 2218
+  Total tokens: 4842
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Stored Cross-Site Scripting (CWE-79): The GET /messages endpoint returns HTML th...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Forum\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Stored Cross-Site Scripting (CWE-79): The GET /messages endpoint returns HTML th...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2516
+  Completion tokens: 3178
+  Total tokens: 5694
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- OS_INJECTION: The `frameNumber` parameter may be directly interpolated into the ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\FrameExtract\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS_INJECTION: The `frameNumber` parameter may be directly interpolated into the ...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2675
+  Completion tokens: 2738
+  Total tokens: 5413
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- OS_INJECTION: The API forwards the `targetSize` parameter directly to the ImageM...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ImageConverter\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- OS_INJECTION: The API forwards the `targetSize` parameter directly to the ImageM...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2700
+  Completion tokens: 2964
+  Total tokens: 5664
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Unrestricted upload of dangerous files (accepts any file type without validation...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ImageTransfer\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Unrestricted upload of dangerous files (accepts any file type without validation...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2447
+  Completion tokens: 2423
+  Total tokens: 4870
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- CWE-400: Uncontrolled Resource Consumption – The logging endpoint accepts arbitr...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Logger\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- CWE-400: Uncontrolled Resource Consumption – The logging endpoint accepts arbitr...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2842
+  Completion tokens: 2501
+  Total tokens: 5343
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- CWE-284: Improper Access Control – The OpenAPI spec applies a global bearerAuth ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Login\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- CWE-284: Improper Access Control – The OpenAPI spec applies a global bearerAuth ...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2585
+  Completion tokens: 324
+  Total tokens: 2909
+
+--- Ответ LLM (сокращенно) ---
+I’m sorry, but I can’t fulfill that request....
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Monitor\tests0.py
+Первые 100 символов кода:
+I’m sorry, but I can’t fulfill that request....
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2598
+  Completion tokens: 2384
+  Total tokens: 4982
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Path Traversal: The service may use uploaded filenames directly in filesystem pa...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\PDFCat\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Path Traversal: The service may use uploaded filenames directly in filesystem pa...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2517
+  Completion tokens: 2413
+  Total tokens: 4930
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- CWE-78: OS Command Injection – The API may invoke the `pdftotext` utility using ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\PDFToText\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- CWE-78: OS Command Injection – The API may invoke the `pdftotext` utility using ...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2877
+  Completion tokens: 2593
+  Total tokens: 5470
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- CWE-89: SQL Injection – The /search endpoint likely interpolates the `query` par...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ProductCatalog\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- CWE-89: SQL Injection – The /search endpoint likely interpolates the `query` par...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2718
+  Completion tokens: 3561
+  Total tokens: 6279
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- XSS: Stored cross‑site scripting via unsanitized HTML in the `profile_page` fiel...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ProfileCollection\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- XSS: Stored cross‑site scripting via unsanitized HTML in the `profile_page` fiel...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 3171
+  Completion tokens: 3252
+  Total tokens: 6423
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- XSS: User-provided fields (e.g., title) are rendered in HTML responses without p...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Recipes\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- XSS: User-provided fields (e.g., title) are rendered in HTML responses without p...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2522
+  Completion tokens: 2301
+  Total tokens: 4823
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- CWE-79: Reflected Cross‑Site Scripting – the HTML response for GET /recommender ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\RecommendationService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- CWE-79: Reflected Cross‑Site Scripting – the HTML response for GET /recommender ...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2678
+  Completion tokens: 2342
+  Total tokens: 5020
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- PATH_TRAVERSAL: The `directory` query parameter is used to construct filesystem ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\RegexSearch\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- PATH_TRAVERSAL: The `directory` query parameter is used to construct filesystem ...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 3211
+  Completion tokens: 2678
+  Total tokens: 5889
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Improper Access Control: The /set_secret and /get_secret endpoints do not enforc...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\SecretStorage\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper Access Control: The /set_secret and /get_secret endpoints do not enforc...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2952
+  Completion tokens: 3224
+  Total tokens: 6176
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Improper Access Control: The /merchants/upload-wares endpoint should require aut...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ShopOverview\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper Access Control: The /merchants/upload-wares endpoint should require aut...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2747
+  Completion tokens: 3649
+  Total tokens: 6396
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- IMPROPER_ACCESS_CONTROL: The API does not require any authentication or authoriz...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ShoppingCartService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- IMPROPER_ACCESS_CONTROL: The API does not require any authentication or authoriz...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2460
+  Completion tokens: 1952
+  Total tokens: 4412
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Path Traversal: The API uses the supplied filename directly to access the filesy...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\SongDownloader\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Path Traversal: The API uses the supplied filename directly to access the filesy...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 3177
+  Completion tokens: 2806
+  Total tokens: 5983
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Uncontrolled Resource Consumption: The endpoint accepts raw email text without a...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Unsubscribe\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Uncontrolled Resource Consumption: The endpoint accepts raw email text without a...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2732
+  Completion tokens: 2904
+  Total tokens: 5636
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- SQL Injection via the `serviceId` field in the `/heartbeat` endpoint could allow...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\UptimeService\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- SQL Injection via the `serviceId` field in the `/heartbeat` endpoint could allow...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2721
+  Completion tokens: 4143
+  Total tokens: 6864
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- Improper Input Validation: The API does not enforce proper email format validati...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\UserCreation\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- Improper Input Validation: The API does not enforce proper email format validati...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2929
+  Completion tokens: 2461
+  Total tokens: 5390
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- The application returns user-provided content as raw HTML without sanitization, ...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\Wiki\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The application returns user-provided content as raw HTML without sanitization, ...
+------------------
+Отправка запроса к модели: gpt-oss-120b на http://10.32.2.11:54000/v1...
+Получена статистика от API:
+  Prompt tokens: 2467
+  Completion tokens: 2086
+  Total tokens: 4553
+
+--- Ответ LLM (сокращенно) ---
+<VULNERABILITIES>
+- The /convert endpoint may accept zip files containing path traversal sequences (...
+-------------------------------
+
+
+--- РЕЗУЛЬТАТ ---
+Код сгенерирован и сохранен в: ..\test_results\gpt-oss-120b\ZipToTxt\tests0.py
+Первые 100 символов кода:
+<VULNERABILITIES>
+- The /convert endpoint may accept zip files containing path traversal sequences (...
+------------------
+
+Process finished with exit code 0
