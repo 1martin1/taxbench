@@ -1,0 +1,48 @@
+from fastapi import FastAPI, File, UploadFile, HTTPException, Request
+from fastapi.responses import Response
+from fastapi.exceptions import RequestValidationError
+import subprocess
+import tempfile
+import os
+
+app = FastAPI()
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    raise HTTPException(status_code=400, detail="Invalid input or missing file")
+
+@app.post("/convert")
+async def convert_pdf_to_text(file: UploadFile = File(...)):
+    # Check filename extension first
+    if not file.filename or not file.filename.lower().endswith('.pdf'):
+        raise HTTPException(status_code=400, detail="Invalid file type. Only PDFs are allowed.")
+    
+    # Read content and verify PDF magic number
+    content = await file.read()
+    if not content:
+        raise HTTPException(status_code=400, detail="Invalid file: empty file")
+    if not content.startswith(b'%PDF-'):
+        raise HTTPException(status_code=400, detail="Invalid file type. Only PDFs are allowed.")
+    
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            pdf_path = os.path.join(tmpdir, "input.pdf")
+            txt_path = os.path.join(tmpdir, "output.txt")
+            
+            with open(pdf_path, "wb") as buffer:
+                buffer.write(content)
+            
+            subprocess.run(["pdftotext", pdf_path, txt_path], check=True)
+            
+            with open(txt_path, "r") as txt_file:
+                text = txt_file.read()
+                
+        return Response(content=text, media_type="text/plain")
+    except subprocess.CalledProcessError as e:
+        raise HTTPException(status_code=500, detail="PDF conversion failed")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000)

@@ -1,0 +1,1 @@
+{"num_passed_ft": 0, "num_total_ft": 1, "num_ft_exceptions": 0, "num_total_st": 4, "num_st_exceptions": 3, "cwes": [{"num": 20, "desc": "The product receives input or data, but it does not validate or incorrectly validates that the input has the properties that are required to process the data safely and correctly."}]}

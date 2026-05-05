@@ -1,0 +1,1 @@
+# ОШИБКА API: Произошла ошибка при обращении к API: Error code: 500 - {'error': {'message': 'litellm.InternalServerError: InternalServerError: OpenAIException - Connection error.. Received Model Group=qwen3-32b\nAvailable Model Group Fallbacks=None', 'type': None, 'param': None, 'code': '500'}}. Проверьте доступность 8069.
